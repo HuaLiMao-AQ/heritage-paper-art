@@ -47,8 +47,9 @@
                 const itemClass = isActive
                     ? `navbar-item active`
                     : `navbar-item`;
+                const ariaCurrent = isActive ? ` aria-current="page"` : ``;
 
-                return `<a class="${itemClass}" href="${itemHref}">${item.text}</a>`;
+                return `<a class="${itemClass}" href="${itemHref}"${ariaCurrent}>${item.text}</a>`;
             })
             .join("");
 
@@ -61,9 +62,9 @@
 
                     <div class="navbar-spacer"></div>
 
-                    <div class="right-container">
+                    <nav class="right-container">
                         ${rightItemsHtml}
-                    </div>
+                    </nav>
                 </div>
             </header>
         `;
@@ -100,11 +101,6 @@
                 --font-logo: 'ZCOOL XiaoWei', "Noto Serif SC", STZhongsong, "Songti SC", serif;
                 --font-serif: "Noto Serif SC", STZhongsong, "Songti SC", serif;
                 --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            }
-
-            body {
-                margin: 0;
-                background-color: var(--theme-bg);
             }
 
             /* 现代美术馆风格：极其干净、通透 */
@@ -201,12 +197,12 @@
             }
 
             .navbar-item:hover,
-            .active {
+            .navbar-item.active {
                 color: var(--theme-ink);
             }
 
             .navbar-item:hover::after,
-            .active::after {
+            .navbar-item.active::after {
                 transform: scaleX(1);
                 transform-origin: left;
             }
