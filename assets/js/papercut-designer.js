@@ -105,12 +105,14 @@
         for (let i = 1; i < stroke.points.length; i++) {
             ctx.lineTo(stroke.points[i].x, stroke.points[i].y);
         }
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = stroke.width || state.strokeWidth;
+        ctx.strokeStyle = stroke.erase ? state.paperColor : "#000";
+        ctx.lineWidth = (stroke.width || state.strokeWidth) + 2;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
 
-        if (state.tool === "eraser" || stroke.erase) {
+        if (stroke.erase) {
+            ctx.globalCompositeOperation = "source-over";
+        } else {
             ctx.globalCompositeOperation = "destination-out";
         }
         ctx.stroke();
@@ -130,9 +132,12 @@
         const x = tpl.x;
         const y = tpl.y;
 
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 2;
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.strokeStyle = "#000";
+        ctx.fillStyle = "#000";
+        ctx.lineWidth = 3;
         ctx.lineCap = "round";
+        ctx.lineJoin = "round";
 
         switch (tpl.type) {
         case "moon":
@@ -220,6 +225,8 @@
 
     function render() {
         ctx.clearRect(0, 0, SIZE, SIZE);
+        ctx.fillStyle = "#faf3ea";
+        ctx.fillRect(0, 0, SIZE, SIZE);
         drawPaper();
         state.templates.forEach(drawTemplate);
         state.strokes.forEach(drawStroke);
@@ -250,6 +257,7 @@
         const scale = uR / RADIUS;
         const drawUnfoldStroke = (stroke) => {
             if (!stroke.points || stroke.points.length < 2) return;
+            if (stroke.erase) return;
             for (let i = 0; i < state.foldMode; i++) {
                 uctx.save();
                 uctx.translate(ucx, ucy);
@@ -262,11 +270,12 @@
                     const p = stroke.points[j];
                     uctx.lineTo(ucx + (p.x - CX) * scale, ucy + (p.y - CY) * scale);
                 }
-                uctx.strokeStyle = "#fff";
-                uctx.lineWidth = (stroke.width || state.strokeWidth) * scale;
+                uctx.globalCompositeOperation = "destination-out";
+                uctx.lineWidth = (stroke.width || state.strokeWidth) * scale + 4;
                 uctx.lineCap = "round";
                 uctx.lineJoin = "round";
                 uctx.stroke();
+                uctx.globalCompositeOperation = "source-over";
                 uctx.restore();
             }
         };
@@ -508,6 +517,7 @@
 
         state.strokes.forEach((stroke) => {
             if (!stroke.points || stroke.points.length < 2) return;
+            if (stroke.erase) return;
             for (let i = 0; i < state.foldMode; i++) {
                 exCtx.save();
                 exCtx.translate(exCx, exCy);
@@ -520,11 +530,12 @@
                     const p = stroke.points[j];
                     exCtx.lineTo(exCx + (p.x - CX) * scale, exCy + (p.y - CY) * scale);
                 }
-                exCtx.strokeStyle = "#fff";
-                exCtx.lineWidth = (stroke.width || state.strokeWidth) * scale;
+                exCtx.globalCompositeOperation = "destination-out";
+                exCtx.lineWidth = (stroke.width || state.strokeWidth) * scale + 4;
                 exCtx.lineCap = "round";
                 exCtx.lineJoin = "round";
                 exCtx.stroke();
+                exCtx.globalCompositeOperation = "source-over";
                 exCtx.restore();
             }
         });
@@ -555,6 +566,7 @@
 
         state.strokes.forEach((stroke) => {
             if (!stroke.points || stroke.points.length < 2) return;
+            if (stroke.erase) return;
             for (let i = 0; i < state.foldMode; i++) {
                 exCtx.save();
                 exCtx.translate(exCx, exCy);
@@ -567,11 +579,12 @@
                     const p = stroke.points[j];
                     exCtx.lineTo(exCx + (p.x - CX) * scale, exCy + (p.y - CY) * scale);
                 }
-                exCtx.strokeStyle = "#fff";
-                exCtx.lineWidth = (stroke.width || state.strokeWidth) * scale;
+                exCtx.globalCompositeOperation = "destination-out";
+                exCtx.lineWidth = (stroke.width || state.strokeWidth) * scale + 4;
                 exCtx.lineCap = "round";
                 exCtx.lineJoin = "round";
                 exCtx.stroke();
+                exCtx.globalCompositeOperation = "source-over";
                 exCtx.restore();
             }
         });
