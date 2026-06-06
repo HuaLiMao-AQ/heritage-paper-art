@@ -116,7 +116,7 @@
     right: 0;
     width: 16px;
     height: 16px;
-    border-right: 16px solid rgba(185, 28, 28, 0.08);
+    border-right: 16px solid var(--color-accent-soft);
     border-bottom: 16px solid transparent;
 }
 
@@ -217,7 +217,7 @@
     right: 0;
     width: 16px;
     height: 16px;
-    border-right: 16px solid rgba(185, 28, 28, 0.08);
+    border-right: 16px solid var(--color-accent-soft);
     border-bottom: 16px solid transparent;
     transition: border-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-right-color 0.3s ease;
 }

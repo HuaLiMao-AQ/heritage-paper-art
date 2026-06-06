@@ -9,7 +9,7 @@
     place-items: center;
     width: 44px;
     height: 44px;
-    background: rgba(185, 28, 28, 0.08);
+    background: var(--color-accent-soft);
     border: 1px solid rgba(185, 28, 28, 0.12);
 }
 

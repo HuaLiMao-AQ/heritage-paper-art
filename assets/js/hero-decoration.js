@@ -193,18 +193,30 @@ document.addEventListener("DOMContentLoaded", () => {
     let isHeroVisible = true;
     let isAnimating = false;
 
-    document.addEventListener("mousemove", (e) => {
-        if (!isHeroVisible) return;
+    function updateTarget(clientX, clientY) {
         const cx = window.innerWidth / 2;
         const cy = window.innerHeight / 2;
-        targetX = (e.clientX - cx) / cx;
-        targetY = (e.clientY - cy) / cy;
-        
+        targetX = (clientX - cx) / cx;
+        targetY = (clientY - cy) / cy;
+    }
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isHeroVisible) return;
+        updateTarget(e.clientX, e.clientY);
         if (!isAnimating) {
             isAnimating = true;
             requestAnimationFrame(animate);
         }
     });
+
+    document.addEventListener("touchmove", (e) => {
+        if (!isHeroVisible) return;
+        updateTarget(e.touches[0].clientX, e.touches[0].clientY);
+        if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(animate);
+        }
+    }, { passive: true });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

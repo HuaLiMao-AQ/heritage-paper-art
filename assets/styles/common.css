@@ -19,7 +19,7 @@
     --color-soft: #9a9088;
     --color-accent: #b91c1c;
     --color-accent-strong: #c91f1f;
-    --color-accent-soft: rgba(185, 28, 28, 0.08);
+    --color-accent-soft: var(--color-accent-soft);
     --color-accent-line: rgba(185, 28, 28, 0.2);
     --shadow-card: 0 2px 8px rgba(26, 20, 15, 0.04);
     --shadow-soft: 0 2px 4px rgba(26, 20, 15, 0.04);
@@ -98,6 +98,30 @@ input,
 textarea,
 select {
     font: inherit;
+}
+
+/* --- Focus & Skip Navigation --- */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 999;
+    padding: 8px 16px;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: var(--radius-xs);
+    font-size: 14px;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+    top: 16px;
 }
 
 .page-main {

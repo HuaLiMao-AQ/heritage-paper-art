@@ -15,7 +15,7 @@
     right: 64px;
     width: 168px;
     height: 168px;
-    border: 1px solid rgba(185, 28, 28, 0.08);
+    border: 1px solid var(--color-accent-soft);
     border-radius: 50%;
 }
 
@@ -24,7 +24,7 @@
     content: "";
     position: absolute;
     inset: 18px;
-    border: 1px solid rgba(185, 28, 28, 0.08);
+    border: 1px solid var(--color-accent-soft);
     border-radius: 50%;
 }
 
