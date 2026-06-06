@@ -38,4 +38,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".reveal").forEach(el => {
         revealObserver.observe(el);
     });
+
+const lightbox = document.getElementById("gallery-lightbox");
+if (lightbox) {
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".gallery-lightbox__close");
+    
+    document.querySelectorAll(".gallery-card img, .papercut-showcase img, .origami-mosaic img").forEach(img => {
+        img.style.cursor = "zoom-in";
+        img.addEventListener("click", () => {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add("is-open");
+        });
+    });
+    
+    const close = () => lightbox.classList.remove("is-open");
+    closeBtn.addEventListener("click", close);
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) close();
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) close();
+    });
+}
 });

@@ -4,6 +4,8 @@ const pageLinks = [
     { key: "papercut", text: "剪纸艺术", href: "./papercut.html" },
     { key: "origami", text: "折纸艺术", href: "./origami.html" },
     { key: "gallery", text: "作品展示", href: "./gallery.html" },
+    { key: "tutorials", text: "教程", href: "./tutorials.html" },
+    { key: "artists", text: "艺术家", href: "./artists.html" },
     { key: "process", text: "制作流程", href: "./process.html" },
     { key: "about", text: "关于纸艺", href: "./about.html" },
 ];

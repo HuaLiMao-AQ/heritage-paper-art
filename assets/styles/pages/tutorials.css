@@ -1,0 +1,75 @@
+.tutorials-hero {
+    padding-top: 88px;
+    padding-bottom: 88px;
+}
+
+.tutorials-hero__text {
+    margin: 24px 0 0;
+    color: var(--color-muted);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.tutorial-card {
+    position: relative;
+    padding: 40px 32px 32px;
+    overflow: hidden;
+}
+
+.tutorial-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-accent), rgba(185, 28, 28, 0.4));
+}
+
+.tutorial-card__num {
+    display: block;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 0.08em;
+}
+
+.tutorial-card__title {
+    margin: 20px 0 0;
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.35;
+    font-weight: 500;
+}
+
+.tutorial-card__text {
+    margin: 14px 0 0;
+    color: var(--color-muted);
+    line-height: 1.8;
+}
+
+.tutorials-cta {
+    padding-top: 72px;
+}
+
+@media (max-width: 1024px) {
+    .tutorials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tutorial-card {
+        padding: 28px 24px;
+    }
+}

@@ -1,0 +1,77 @@
+.artists-hero__text {
+    margin: 24px 0 0;
+    color: var(--color-muted);
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+}
+
+.artist-card {
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.artist-card__image {
+    aspect-ratio: 16 / 9;
+}
+
+.artist-card__body {
+    padding: 32px;
+}
+
+.artist-card__name {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.artist-card__title {
+    margin: 8px 0 0;
+    color: var(--color-accent);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+}
+
+.artist-card__bio {
+    margin: 20px 0 0;
+    color: var(--color-muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.artist-card__contribution {
+    margin: 16px 0 0;
+    padding: 16px 20px;
+    background: rgba(250, 243, 234, 0.6);
+    border-left: 3px solid var(--color-accent);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--color-text);
+}
+
+.artists-cta {
+    padding-top: 88px;
+}
+
+@media (max-width: 1024px) {
+    .artists-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .artist-card__body {
+        padding: 24px;
+    }
+
+    .artist-card__name {
+        font-size: 24px;
+    }
+}
