@@ -12,10 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    // ── 1. 折纸光影背景 (3D Origami Folds) ──
-    // 原理：不画线，而是画“被折叠的面”，通过光影渐变和高光来体现纸张的起伏
     function drawOrigamiFolds(w, h) {
-        // 第一折面：底部的对角大斜面
         ctx.beginPath();
         ctx.moveTo(0, h * 0.55);
         ctx.lineTo(w, h * 0.35);
@@ -23,14 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineTo(0, h);
         ctx.closePath();
 
-        // 用渐变模拟光线打在倾斜纸面上的阴影衰减
         const grad1 = ctx.createLinearGradient(0, h * 0.35, 0, h);
-        grad1.addColorStop(0, "rgba(0, 0, 0, 0.04)"); // 折痕处略暗
-        grad1.addColorStop(1, "rgba(0, 0, 0, 0)");    // 向下褪淡
+        grad1.addColorStop(0, "rgba(0, 0, 0, 0.04)");
+        grad1.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = grad1;
         ctx.fill();
 
-        // 纸张边缘的受光高光线
         ctx.beginPath();
         ctx.moveTo(0, h * 0.55);
         ctx.lineTo(w, h * 0.35);
@@ -38,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // 第二折面：左侧重叠的三角折面
         ctx.beginPath();
         ctx.moveTo(0, h * 0.05);
         ctx.lineTo(w * 0.55, h * 0.45);
@@ -46,10 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.closePath();
 
         const grad2 = ctx.createLinearGradient(0, h * 0.05, w * 0.55, h * 0.45);
-        grad2.addColorStop(0, "rgba(255, 255, 255, 0.5)"); // 顶部迎光面
-        grad2.addColorStop(1, "rgba(0, 0, 0, 0.02)");      // 底部背光面
+        grad2.addColorStop(0, "rgba(255, 255, 255, 0.5)");
+        grad2.addColorStop(1, "rgba(0, 0, 0, 0.02)");
 
-        // 添加物理投影，表现纸层的堆叠厚度
         ctx.save();
         ctx.shadowColor = "rgba(0, 0, 0, 0.05)";
         ctx.shadowBlur = 15;
@@ -58,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fill();
         ctx.restore();
 
-        // 折痕边缘高光
         ctx.beginPath();
         ctx.moveTo(0, h * 0.05);
         ctx.lineTo(w * 0.55, h * 0.45);
@@ -67,13 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.stroke();
     }
 
-    // ── 2. 实体厚度剪纸 (Solid Papercut with Drop Shadow) ──
-    // 原理：抛弃 1px 细线，把图形当成“有物理厚度的面”来画，并加上红色弥散投影
     function drawPaperCut(cx, cy, R, color) {
         ctx.save();
 
-        // 核心：添加物理投影，制造“剪纸贴在纸面上”的悬浮感
-        ctx.shadowColor = "rgba(185, 28, 28, 0.25)"; // 使用带红色的投影更逼真
+        ctx.shadowColor = "rgba(185, 28, 28, 0.25)";
         ctx.shadowBlur = 20;
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 8;
@@ -81,29 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.fillStyle = color;
         ctx.strokeStyle = color;
 
-        // 剪纸外框（非常厚的描边，代表纸张实体，而不是细线）
+
         ctx.beginPath();
         ctx.arc(cx, cy, R, 0, Math.PI * 2);
-        ctx.lineWidth = R * 0.06; // 根据比例生成厚度
+        ctx.lineWidth = R * 0.06;
         ctx.stroke();
 
-        // 内部副环
+
         ctx.beginPath();
         ctx.arc(cx, cy, R * 0.72, 0, Math.PI * 2);
         ctx.lineWidth = R * 0.03;
         ctx.stroke();
 
-        // 实心圆心
+
         ctx.beginPath();
         ctx.arc(cx, cy, R * 0.22, 0, Math.PI * 2);
         ctx.fill();
 
-        // 8 片实心花瓣（面）与连接纸条
         const petals = 8;
         for (let i = 0; i < petals; i++) {
             const angle = (Math.PI * 2 * i) / petals;
 
-            // 画实心叶片
             ctx.save();
             ctx.translate(
                 cx + Math.cos(angle) * (R * 0.47),
@@ -115,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.fill();
             ctx.restore();
 
-            // 连接环与环的“过桥”纸条（加粗线段）
             ctx.beginPath();
             ctx.moveTo(cx + Math.cos(angle) * (R * 0.72), cy + Math.sin(angle) * (R * 0.72));
             ctx.lineTo(cx + Math.cos(angle) * R, cy + Math.sin(angle) * R);
@@ -126,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
-    // ── 3. 散落纸片 (Floating Cut Paper Scraps) ──
     function drawPaperScrap(x, y, size, angle, color) {
         ctx.save();
 
@@ -138,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.rotate(angle);
         ctx.fillStyle = color;
 
-        // 实心菱形碎纸片
         ctx.beginPath();
         ctx.moveTo(0, -size);
         ctx.lineTo(size, 0);
@@ -166,19 +150,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const color = getAccentColor();
         const scale = Math.min(w, h);
 
-        // 1. 背景层 (折纸) - 移动幅度最小
         ctx.save();
         ctx.translate(ox * 8, oy * 8);
         drawOrigamiFolds(w, h);
         ctx.restore();
 
-        // 2. 中景层 (实体红色窗花剪纸) - 移动幅度中等
         ctx.save();
         ctx.translate(ox * 20, oy * 20);
         drawPaperCut(w * 0.75, h * 0.22, scale * 0.24, color);
         ctx.restore();
 
-        // 3. 前景层 (散落碎纸片) - 移动幅度最大，立体感最强
         ctx.save();
         ctx.translate(ox * 40, oy * 40);
         drawPaperScrap(w * 0.15, h * 0.18, scale * 0.02, Math.PI / 6, color);
@@ -187,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
-    // ── 鼠标交互与视差动画 (Mouse Parallax Loop) ──
     let targetX = 0, targetY = 0;
     let currentX = 0, currentY = 0;
     let isHeroVisible = true;
@@ -239,13 +219,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 平滑插值 (Easing)
         currentX += (targetX - currentX) * 0.06;
         currentY += (targetY - currentY) * 0.06;
 
         drawScene(currentX, currentY);
 
-        // 如果鼠标停止且插值完成，暂停动画循环以节省性能
         if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
             requestAnimationFrame(animate);
         } else {
@@ -253,10 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 初始化绘制
     drawScene(0, 0);
 
-    // 窗口大小改变时强制重绘
     let resizeTimer;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);

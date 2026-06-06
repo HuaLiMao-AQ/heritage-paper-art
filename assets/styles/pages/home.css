@@ -1,6 +1,6 @@
 .hero {
     background: var(--color-bg-soft);
-    padding: 0; /* Let flex centering do its job */
+    padding: 0;
 }
 
 .hero-decoration-canvas {
