@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!el.classList.contains("reveal")) {
             el.classList.add("reveal");
         }
-        }
     });
 
     const revealObserver = new IntersectionObserver((entries, observer) => {

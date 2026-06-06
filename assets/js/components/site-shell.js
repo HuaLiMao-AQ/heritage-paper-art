@@ -12,7 +12,6 @@ const pageLinks = [
     {
         text: "学习资源",
         children: [
-            { key: "designer", text: "剪纸设计", href: "./papercut-designer.html" },
             { key: "tutorials", text: "教程", href: "./tutorials.html" },
             { key: "process", text: "制作流程", href: "./process.html" },
         ],
