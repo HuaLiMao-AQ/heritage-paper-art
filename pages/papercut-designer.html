@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="在线剪纸设计器 - 模拟传统剪纸工艺，折叠、绘制、展开，创造属于你的窗花作品。">
+    <meta property="og:title" content="中华纸艺 - 剪纸设计器">
+    <meta property="og:description" content="在线体验剪纸艺术。选择折叠方式，自由绘制图案，一键展开欣赏对称之美。">
+    <meta property="og:type" content="website">
+    <title>中华纸艺 - 剪纸设计器</title>
+    <link rel="preload" href="../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2">
+    <link rel="stylesheet" href="../assets/styles/common.css">
+    <link rel="stylesheet" href="../assets/styles/pages/papercut-designer.css">
+    <link rel="icon" href="../assets/favicon-16.svg" type="image/svg+xml">
+</head>
+<body data-page="designer">
+    <a class="skip-to-content" href="#main-content">跳到主要内容</a>
+    <site-navbar active="designer"></site-navbar>
+    <main class="page-main" id="main-content">
+        <section class="designer-layout">
+            <aside class="designer-panel designer-panel--left">
+                <div class="panel-section">
+                    <h3 class="panel-title">折叠方式</h3>
+                    <div class="fold-options" id="fold-options">
+                        <button class="fold-btn" data-fold="2">
+                            <span class="fold-btn__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 2L2 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/></svg>
+                            </span>
+                            <span>对折</span>
+                        </button>
+                        <button class="fold-btn is-active" data-fold="4">
+                            <span class="fold-btn__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 2L2 12M12 2L22 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/></svg>
+                            </span>
+                            <span>四折</span>
+                        </button>
+                        <button class="fold-btn" data-fold="6">
+                            <span class="fold-btn__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 2L12 22M2 12h20M5 5L19 19" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 2" opacity="0.5"/></svg>
+                            </span>
+                            <span>六折</span>
+                        </button>
+                        <button class="fold-btn" data-fold="8">
+                            <span class="fold-btn__icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 2v20M2 12h20M5 5L19 19M5 19L19 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 2" opacity="0.3"/></svg>
+                            </span>
+                            <span>八折</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3 class="panel-title">绘制工具</h3>
+                    <div class="tool-options" id="tool-options">
+                        <button class="tool-btn is-active" data-tool="pen">✏️ 画笔</button>
+                        <button class="tool-btn" data-tool="eraser">🧹 橡皮</button>
+                    </div>
+                    <div class="tool-extra">
+                        <label class="stroke-label">线宽</label>
+                        <input type="range" id="stroke-width" min="1" max="8" value="3" class="stroke-slider">
+                    </div>
+                    <div class="tool-actions">
+                        <button class="action-btn" id="btn-undo">↩️ 撤销</button>
+                        <button class="action-btn" id="btn-clear">🔄 清空</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="designer-canvas-wrap">
+                <canvas id="papercut-canvas" width="500" height="500"></canvas>
+                <div class="canvas-hint" id="canvas-hint">在扇形区域内绘制图案</div>
+            </div>
+
+            <aside class="designer-panel designer-panel--right">
+                <div class="panel-section">
+                    <h3 class="panel-title">模板纹样</h3>
+                    <div class="template-grid" id="template-grid">
+                        <button class="template-chip" data-template="moon">🌙 月牙纹</button>
+                        <button class="template-chip" data-template="sawtooth">⋀⋀ 锯齿纹</button>
+                        <button class="template-chip" data-template="dot">● 圆点</button>
+                        <button class="template-chip" data-template="leaf">🍃 柳叶纹</button>
+                        <button class="template-chip" data-template="cloud">☁ 云纹</button>
+                        <button class="template-chip" data-template="coin">◎ 铜钱</button>
+                        <button class="template-chip" data-template="plum">❀ 梅花</button>
+                        <button class="template-chip" data-template="butterfly">🦋 蝴蝶</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3 class="panel-title">纸色</h3>
+                    <div class="color-options" id="color-options">
+                        <button class="color-chip is-active" data-color="#b91c1c" style="background:#b91c1c" title="大红"></button>
+                        <button class="color-chip" data-color="#d97706" style="background:#d97706" title="明黄"></button>
+                        <button class="color-chip" data-color="#059669" style="background:#059669" title="翠绿"></button>
+                        <button class="color-chip" data-color="#2563eb" style="background:#2563eb" title="藏蓝"></button>
+                        <button class="color-chip" data-color="#1c1c1c" style="background:#1c1c1c" title="墨黑"></button>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <div class="designer-bar">
+            <button class="button button--primary" id="btn-unfold">展开预览</button>
+            <button class="button button--secondary" id="btn-export">导出 PNG</button>
+            <button class="button button--secondary" id="btn-share">分享</button>
+        </div>
+    </main>
+
+    <div class="unfold-overlay" id="unfold-overlay">
+        <canvas id="unfold-canvas"></canvas>
+        <button class="unfold-close" id="unfold-close">✕ 返回编辑</button>
+    </div>
+
+    <script type="module" src="../assets/js/components/site-shell.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/papercut-designer.js"></script>
+</body>
+</html>
