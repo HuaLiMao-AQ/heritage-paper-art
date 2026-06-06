@@ -16,10 +16,10 @@
         activeTemplate: null,
     };
 
-    const SIZE = 500;
+    const SIZE = 560;
     const CX = SIZE / 2;
     const CY = SIZE / 2;
-    const RADIUS = 220;
+    const RADIUS = 250;
 
     canvas.width = SIZE;
     canvas.height = SIZE;
@@ -435,6 +435,8 @@
 
     document.getElementById("stroke-width").addEventListener("input", (e) => {
         state.strokeWidth = parseInt(e.target.value);
+        const valEl = document.getElementById("stroke-width-val");
+        if (valEl) valEl.textContent = e.target.value;
     });
 
     document.getElementById("btn-undo").addEventListener("click", () => {

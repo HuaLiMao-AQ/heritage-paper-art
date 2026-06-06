@@ -18,81 +18,84 @@
     <site-navbar active="designer"></site-navbar>
     <main class="page-main" id="main-content">
 
-        <section class="section designer-hero">
-            <div class="container">
-                <p class="eyebrow">互动体验</p>
-                <h1 class="section-title">剪纸设计器</h1>
-                <div class="section-rule"></div>
-                <p class="designer-hero__desc">选择折叠方式，自由绘制图案，一键展开欣赏对称之美</p>
+        <section class="designer-stage">
+            <div class="canvas-paper">
+                <canvas id="papercut-canvas" width="560" height="560"></canvas>
             </div>
+            <p class="canvas-hint" id="canvas-hint">在扇形区域内自由绘制，画出你想剪的图案</p>
         </section>
 
-        <section class="designer-body">
-            <div class="container designer-grid">
-                <div class="designer-card">
-                    <h3 class="designer-card__title">折叠方式</h3>
+        <div class="designer-controls">
+            <div class="controls-row">
+                <div class="control-group">
+                    <span class="control-label">折叠</span>
                     <div class="fold-options" id="fold-options">
-                        <button class="fold-btn" data-fold="2">对折<span class="fold-btn__sub">2 层</span></button>
-                        <button class="fold-btn is-active" data-fold="4">四折<span class="fold-btn__sub">4 层</span></button>
-                        <button class="fold-btn" data-fold="6">六折<span class="fold-btn__sub">6 层</span></button>
-                        <button class="fold-btn" data-fold="8">八折<span class="fold-btn__sub">8 层</span></button>
+                        <button class="fold-btn" data-fold="2">对折</button>
+                        <button class="fold-btn is-active" data-fold="4">四折</button>
+                        <button class="fold-btn" data-fold="6">六折</button>
+                        <button class="fold-btn" data-fold="8">八折</button>
                     </div>
-                    <h3 class="designer-card__title" style="margin-top:24px">绘制工具</h3>
+                </div>
+
+                <div class="control-divider"></div>
+
+                <div class="control-group">
+                    <span class="control-label">工具</span>
                     <div class="tool-row" id="tool-options">
                         <button class="tool-btn is-active" data-tool="pen">画笔</button>
                         <button class="tool-btn" data-tool="eraser">橡皮</button>
                     </div>
-                    <label class="stroke-label">线宽 <span id="stroke-width-val">3</span></label>
-                    <input type="range" id="stroke-width" min="1" max="8" value="3" class="stroke-slider">
-                    <div class="tool-row" style="margin-top:12px">
-                        <button class="action-btn" id="btn-undo">撤销</button>
-                        <button class="action-btn" id="btn-clear">清空</button>
-                    </div>
                 </div>
 
-                <div class="designer-stage">
-                    <div class="canvas-paper">
-                        <canvas id="papercut-canvas" width="500" height="500"></canvas>
-                    </div>
-                    <p class="canvas-hint" id="canvas-hint">在扇形区域内自由绘制</p>
-                    <div class="designer-actions">
-                        <button class="button button--primary" id="btn-unfold">展开预览</button>
-                        <button class="button" id="btn-export">导出图片</button>
-                        <button class="button" id="btn-share">分享作品</button>
-                    </div>
+                <div class="control-divider"></div>
+
+                <div class="control-group">
+                    <span class="control-label">线宽</span>
+                    <input type="range" id="stroke-width" min="1" max="8" value="3">
+                    <span class="stroke-val" id="stroke-width-val">3</span>
                 </div>
 
-                <div class="designer-card">
-                    <h3 class="designer-card__title">纸色</h3>
+                <div class="control-divider"></div>
+
+                <div class="control-group">
+                    <button class="action-btn" id="btn-undo">撤销</button>
+                    <button class="action-btn" id="btn-clear">清空</button>
+                </div>
+            </div>
+
+            <div class="controls-row">
+                <div class="control-group">
+                    <span class="control-label">纸色</span>
                     <div class="color-options" id="color-options">
-                        <button class="color-chip is-active" data-color="#b91c1c">
-                            <span class="color-chip__swatch" style="background:#b91c1c"></span>大红纸
-                        </button>
-                        <button class="color-chip" data-color="#f59e0b">
-                            <span class="color-chip__swatch" style="background:#f59e0b"></span>金纸
-                        </button>
-                        <button class="color-chip" data-color="#059669">
-                            <span class="color-chip__swatch" style="background:#059669"></span>青纸
-                        </button>
-                        <button class="color-chip" data-color="#7c3aed">
-                            <span class="color-chip__swatch" style="background:#7c3aed"></span>紫纸
-                        </button>
-                        <button class="color-chip" data-color="#1c1c1c">
-                            <span class="color-chip__swatch" style="background:#1c1c1c"></span>黑纸
-                        </button>
+                        <button class="color-chip is-active" data-color="#b91c1c"><span style="background:#b91c1c"></span>大红</button>
+                        <button class="color-chip" data-color="#cc3e1c"><span style="background:#cc3e1c"></span>朱砂</button>
+                        <button class="color-chip" data-color="#d4a017"><span style="background:#d4a017"></span>金箔</button>
+                        <button class="color-chip" data-color="#1a6b4a"><span style="background:#1a6b4a"></span>黛青</button>
+                        <button class="color-chip" data-color="#2d1f1f"><span style="background:#2d1f1f"></span>墨色</button>
                     </div>
-                    <h3 class="designer-card__title" style="margin-top:24px">模板纹样</h3>
+                </div>
+
+                <div class="control-divider"></div>
+
+                <div class="control-group">
+                    <span class="control-label">纹样</span>
                     <div class="template-grid" id="template-grid">
-                        <button class="template-chip" data-template="moon"><span class="template-chip__icon"></span>月牙纹</button>
-                        <button class="template-chip" data-template="sawtooth"><span class="template-chip__icon template-chip__icon--saw"></span>锯齿纹</button>
-                        <button class="template-chip" data-template="dot"><span class="template-chip__icon template-chip__icon--dot"></span>圆点</button>
-                        <button class="template-chip" data-template="cloud"><span class="template-chip__icon template-chip__icon--cloud"></span>云纹</button>
-                        <button class="template-chip" data-template="coin"><span class="template-chip__icon template-chip__icon--coin"></span>铜钱</button>
-                        <button class="template-chip" data-template="plum"><span class="template-chip__icon template-chip__icon--plum"></span>梅花</button>
+                        <button class="template-chip" data-template="moon">月牙纹</button>
+                        <button class="template-chip" data-template="sawtooth">锯齿纹</button>
+                        <button class="template-chip" data-template="dot">圆点</button>
+                        <button class="template-chip" data-template="cloud">云纹</button>
+                        <button class="template-chip" data-template="coin">铜钱</button>
+                        <button class="template-chip" data-template="plum">梅花</button>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <div class="controls-row controls-actions">
+                <button class="button button--primary" id="btn-unfold">展开预览</button>
+                <button class="button button--secondary" id="btn-export">导出图片</button>
+                <button class="button button--secondary" id="btn-share">分享作品</button>
+            </div>
+        </div>
     </main>
 
     <div class="unfold-overlay" id="unfold-overlay">
