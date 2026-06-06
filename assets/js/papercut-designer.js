@@ -9,7 +9,7 @@
         templates: [],
         currentStroke: null,
         paperColor: "#b91c1c",
-        tool: "pen",
+        tool: "scissors",
         strokeWidth: 3,
         isDrawing: false,
         isUnfolded: false,
