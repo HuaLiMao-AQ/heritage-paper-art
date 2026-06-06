@@ -1,0 +1,161 @@
+.process-hero {
+    padding-top: 88px;
+}
+
+.process-hero__text {
+    margin: 24px 0 0;
+    color: var(--color-muted);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.process-ribbon {
+    display: grid;
+    gap: 24px;
+}
+
+.process-step {
+    position: relative;
+    padding: 36px 40px 36px 128px;
+    overflow: hidden;
+}
+
+.process-step::before {
+    content: attr(data-step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 96px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, rgba(201, 31, 31, 0.96), rgba(185, 28, 28, 0.88));
+    color: var(--color-surface);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 0.08em;
+}
+
+.process-step::after {
+    content: "";
+    position: absolute;
+    left: 84px;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0));
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.process-step__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 26px;
+    line-height: 1.35;
+    font-weight: 500;
+}
+
+.process-step__text {
+    margin: 14px 0 0;
+    color: var(--color-muted);
+    line-height: 1.8;
+}
+
+.origami-process-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    align-items: start;
+}
+
+.origami-process-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.origami-step {
+    padding: 28px 22px;
+}
+
+.origami-step__num {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    font-size: 15px;
+}
+
+.origami-step__title {
+    margin: 16px 0 0;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.origami-step__text,
+.origami-note__list,
+.tools-card__list,
+.advice-card__list {
+    margin: 14px 0 0;
+    color: var(--color-muted);
+    line-height: 1.85;
+}
+
+.origami-note {
+    padding: 24px 26px;
+    background: rgba(185, 28, 28, 0.05);
+}
+
+.origami-note__title,
+.tools-card__title,
+.advice-card__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.origami-note__list,
+.tools-card__list,
+.advice-card__list {
+    padding-left: 20px;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.tools-card {
+    padding: 28px 24px;
+}
+
+.advice-card {
+    padding: 32px;
+    background: rgba(185, 28, 28, 0.05);
+}
+
+@media (max-width: 1024px) {
+    .origami-process-layout,
+    .origami-process-grid,
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-step {
+        padding: 24px;
+        padding-left: 104px;
+    }
+
+    .origami-step,
+    .tools-card,
+    .advice-card {
+        padding: 24px;
+    }
+}

@@ -1,0 +1,129 @@
+.origami-hero {
+    padding-top: 88px;
+}
+
+.origami-hero__text {
+    margin: 24px 0 0;
+    color: var(--color-muted);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.origami-hero__pattern {
+    position: absolute;
+    top: 56px;
+    right: 72px;
+    width: 164px;
+    height: 164px;
+    border: 1px solid rgba(185, 28, 28, 0.08);
+    transform: rotate(45deg);
+}
+
+.origami-hero__pattern::before,
+.origami-hero__pattern::after {
+    content: "";
+    position: absolute;
+    inset: 24px;
+    border: 1px solid rgba(185, 28, 28, 0.08);
+}
+
+.origami-hero__pattern::after {
+    inset: 52px;
+}
+
+.origami-intro {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+    align-items: center;
+}
+
+.origami-copy {
+    padding: 28px;
+}
+
+.origami-copy__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.origami-copy__text,
+.origami-feature__text,
+.origami-modern__text {
+    margin: 16px 0 0;
+    color: var(--color-muted);
+    line-height: 1.85;
+}
+
+.origami-mosaic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.origami-mosaic img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.origami-mosaic img:first-child {
+    aspect-ratio: 1 / 1;
+}
+
+.origami-mosaic img:nth-child(2) {
+    aspect-ratio: 1 / 1;
+}
+
+.origami-mosaic img:last-child {
+    grid-column: 1 / 2;
+    aspect-ratio: 1 / 1;
+}
+
+.origami-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.origami-feature {
+    padding: 26px 24px;
+}
+
+.origami-feature:last-child {
+    grid-column: 1 / 2;
+}
+
+.origami-feature__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.origami-modern {
+    text-align: center;
+}
+
+.origami-modern__text {
+    max-width: 820px;
+    margin-inline: auto;
+}
+
+@media (max-width: 1024px) {
+    .origami-intro,
+    .origami-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .origami-feature:last-child {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .origami-hero__pattern {
+        display: none;
+    }
+}

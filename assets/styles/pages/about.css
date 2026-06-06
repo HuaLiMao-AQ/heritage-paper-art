@@ -1,0 +1,161 @@
+.about-hero {
+    text-align: center;
+}
+
+.about-hero__text {
+    margin-inline: auto;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 48px;
+    align-items: center;
+}
+
+.about-block {
+    min-height: 180px;
+    padding: 40px 44px;
+}
+
+.about-block--mission {
+    min-height: 0;
+}
+
+.about-block__eyebrow {
+    margin: 0 0 20px;
+}
+
+.about-block__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.about-block__text {
+    margin: 16px 0 0;
+    color: var(--color-muted);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.mission-collage {
+    position: relative;
+    min-height: 300px;
+    padding: 20px;
+}
+
+.mission-collage img {
+    position: absolute;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.mission-collage__main {
+    top: 20px;
+    left: 20px;
+    width: 180px;
+    height: 200px;
+}
+
+.mission-collage__side {
+    right: 20px;
+    bottom: 20px;
+    width: 180px;
+    height: 200px;
+}
+
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.value-card {
+    padding: 28px 24px;
+    text-align: center;
+}
+
+.value-card__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+    background: rgba(185, 28, 28, 0.08);
+    color: var(--color-accent);
+    font-size: 20px;
+}
+
+.value-card__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.value-card__text {
+    margin: 12px 0 0;
+    color: var(--color-muted);
+    line-height: 1.75;
+}
+
+.meaning-list {
+    display: grid;
+    gap: 22px;
+}
+
+.meaning-block {
+    padding: 28px 32px 28px 40px;
+    background: rgba(255, 253, 249, 0.8);
+    border-left: 4px solid var(--color-accent);
+}
+
+.meaning-block__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.meaning-block__text {
+    margin: 16px 0 0;
+    color: var(--color-muted);
+    line-height: 1.85;
+}
+
+.about-cta {
+    padding-bottom: 104px;
+}
+
+@media (max-width: 1024px) {
+    .mission-grid,
+    .value-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-block,
+    .value-card {
+        padding: 24px;
+    }
+
+    .mission-collage {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        min-height: 0;
+        padding: 16px;
+    }
+
+    .mission-collage img,
+    .mission-collage__main,
+    .mission-collage__side {
+        position: static;
+        width: 100%;
+        height: 180px;
+    }
+}
