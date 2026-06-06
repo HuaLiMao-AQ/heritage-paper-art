@@ -1,5 +1,4 @@
 .hero {
-    overflow: clip;
     background: var(--color-bg-soft);
     padding: 0; /* Let flex centering do its job */
 }
@@ -63,9 +62,9 @@
     height: 432px;
 }
 
-.hero-stack,
-.hero-stack::before,
-.hero-stack::after {
+.hero-stack {
+    position: relative;
+    z-index: 1;
     border-radius: var(--radius-sm);
     width: 576px;
     height: 384px;
@@ -75,25 +74,30 @@
 .hero-stack::after {
     content: "";
     position: absolute;
+    z-index: -2;
     top: 32px;
     left: 32px;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-sm);
     background: var(--color-surface-glass);
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-card);
 }
 
 .hero-stack::after {
+    z-index: -1;
     top: 16px;
     left: 16px;
 }
 
 .hero-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 576px;
-    height: 384px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    border-radius: var(--radius-sm);
     background: var(--color-surface);
     border: 1px solid var(--color-accent-line);
     box-shadow: var(--shadow-card);
@@ -190,6 +194,12 @@
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-soft);
     overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.paper-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(26, 20, 15, 0.08);
 }
 
 .paper-card__inner {
@@ -209,6 +219,15 @@
     height: 16px;
     border-right: 16px solid rgba(185, 28, 28, 0.08);
     border-bottom: 16px solid transparent;
+    transition: border-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-right-color 0.3s ease;
+}
+
+.paper-card:hover.paper-card--fold::after,
+.art-card:hover.art-card--fold::after,
+.work-card:hover.work-card--fold::after {
+    border-right-width: 24px;
+    border-bottom-width: 24px;
+    border-right-color: rgba(185, 28, 28, 0.15);
 }
 
 .feature-point {
@@ -261,10 +280,29 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-card);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.art-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(26, 20, 15, 0.1);
 }
 
 .art-card__image {
     height: clamp(200px, 35vh, 436px);
+}
+
+.art-card__image img,
+.work-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.art-card:hover .art-card__image img,
+.work-card:hover .work-card__image img {
+    transform: scale(1.05);
 }
 
 .art-card__body {
@@ -328,6 +366,12 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-card);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(26, 20, 15, 0.1);
 }
 
 .work-card__image {
@@ -367,10 +411,7 @@
         padding-top: 180px;
     }
 
-    .hero-stack,
-    .hero-stack::before,
-    .hero-stack::after,
-    .hero-frame {
+    .hero-stack {
         width: 100%;
     }
 
@@ -394,10 +435,7 @@
     }
 
     .hero-visual,
-    .hero-stack,
-    .hero-stack::before,
-    .hero-stack::after,
-    .hero-frame {
+    .hero-stack {
         height: 320px;
     }
 
@@ -431,10 +469,7 @@
     }
 
     .hero-visual,
-    .hero-stack,
-    .hero-stack::before,
-    .hero-stack::after,
-    .hero-frame {
+    .hero-stack {
         height: 260px;
     }
 

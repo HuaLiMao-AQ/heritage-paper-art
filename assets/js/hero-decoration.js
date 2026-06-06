@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
-    function draw() {
+    function drawScene(ox = 0, oy = 0) {
         const hero = canvas.closest(".hero");
         if (!hero) return;
 
@@ -166,25 +166,88 @@ document.addEventListener("DOMContentLoaded", () => {
         const color = getAccentColor();
         const scale = Math.min(w, h);
 
-        // 1. 绘制立体折纸背景（光影折面）
+        // 1. 背景层 (折纸) - 移动幅度最小
+        ctx.save();
+        ctx.translate(ox * 8, oy * 8);
         drawOrigamiFolds(w, h);
+        ctx.restore();
 
-        // 2. 绘制具有厚度和投影的实体红色窗花剪纸 (右上)
+        // 2. 中景层 (实体红色窗花剪纸) - 移动幅度中等
+        ctx.save();
+        ctx.translate(ox * 20, oy * 20);
         drawPaperCut(w * 0.75, h * 0.22, scale * 0.24, color);
+        ctx.restore();
 
-        // 3. 绘制几片带有投影的散落碎纸片增加空间感
+        // 3. 前景层 (散落碎纸片) - 移动幅度最大，立体感最强
+        ctx.save();
+        ctx.translate(ox * 40, oy * 40);
         drawPaperScrap(w * 0.15, h * 0.18, scale * 0.02, Math.PI / 6, color);
         drawPaperScrap(w * 0.85, h * 0.55, scale * 0.015, -Math.PI / 8, color);
         drawPaperScrap(w * 0.45, h * 0.65, scale * 0.012, Math.PI / 4, color);
+        ctx.restore();
+    }
+
+    // ── 鼠标交互与视差动画 (Mouse Parallax Loop) ──
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let isHeroVisible = true;
+    let isAnimating = false;
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isHeroVisible) return;
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        targetX = (e.clientX - cx) / cx;
+        targetY = (e.clientY - cy) / cy;
+        
+        if (!isAnimating) {
+            isAnimating = true;
+            requestAnimationFrame(animate);
+        }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isHeroVisible = entry.isIntersecting;
+            if (isHeroVisible && !isAnimating) {
+                isAnimating = true;
+                requestAnimationFrame(animate);
+            }
+        });
+    });
+    
+    const heroSection = canvas.closest(".hero");
+    if (heroSection) {
+        observer.observe(heroSection);
+    }
+
+    function animate() {
+        if (!isHeroVisible) {
+            isAnimating = false;
+            return;
+        }
+
+        // 平滑插值 (Easing)
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+
+        drawScene(currentX, currentY);
+
+        // 如果鼠标停止且插值完成，暂停动画循环以节省性能
+        if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+            requestAnimationFrame(animate);
+        } else {
+            isAnimating = false;
+        }
     }
 
     // 初始化绘制
-    draw();
+    drawScene(0, 0);
 
-    // 防抖处理窗口大小改变
+    // 窗口大小改变时强制重绘
     let resizeTimer;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(draw, 100);
+        resizeTimer = setTimeout(() => drawScene(currentX, currentY), 100);
     });
 });
