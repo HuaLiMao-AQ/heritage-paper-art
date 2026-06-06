@@ -1,25 +1,58 @@
 const pageLinks = [
     { key: "home", text: "首页", href: "./home.html" },
-    { key: "history", text: "纸艺历史", href: "./history.html" },
-    { key: "papercut", text: "剪纸艺术", href: "./papercut.html" },
-    { key: "origami", text: "折纸艺术", href: "./origami.html" },
+    {
+        text: "纸艺文化",
+        children: [
+            { key: "history", text: "纸艺历史", href: "./history.html" },
+            { key: "papercut", text: "剪纸艺术", href: "./papercut.html" },
+            { key: "origami", text: "折纸艺术", href: "./origami.html" },
+        ],
+    },
     { key: "gallery", text: "作品展示", href: "./gallery.html" },
-    { key: "tutorials", text: "教程", href: "./tutorials.html" },
-    { key: "artists", text: "艺术家", href: "./artists.html" },
-    { key: "process", text: "制作流程", href: "./process.html" },
-    { key: "about", text: "关于纸艺", href: "./about.html" },
+    {
+        text: "学习资源",
+        children: [
+            { key: "tutorials", text: "教程", href: "./tutorials.html" },
+            { key: "process", text: "制作流程", href: "./process.html" },
+        ],
+    },
+    {
+        text: "关于",
+        children: [
+            { key: "artists", text: "艺术家", href: "./artists.html" },
+            { key: "about", text: "关于纸艺", href: "./about.html" },
+        ],
+    },
 ];
 
 class SiteNavbar extends HTMLElement {
     connectedCallback() {
         const active = this.getAttribute("active") || document.body.dataset.page || "home";
-        const navLinks = pageLinks.map((item) => {
+
+        function renderLink(item) {
             const isActive = item.key === active;
+            return `<a class="nav-link${isActive ? " is-active" : ""}" href="${item.href}"${isActive ? ' aria-current="page"' : ""}>${item.text}</a>`;
+        }
+
+        function renderDropdown(group) {
+            const hasActiveChild = group.children.some(c => c.key === active);
+            const childrenHTML = group.children.map(renderLink).join("");
             return `
-                <a class="nav-link${isActive ? " is-active" : ""}" href="${item.href}"${isActive ? ' aria-current="page"' : ""}>
-                    ${item.text}
-                </a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown__trigger${hasActiveChild ? " is-active" : ""}">
+                        ${group.text}
+                        <span class="nav-dropdown__arrow"></span>
+                    </button>
+                    <div class="nav-dropdown__menu">
+                        ${childrenHTML}
+                    </div>
+                </div>
             `;
+        }
+
+        const navLinks = pageLinks.map((item) => {
+            if (item.children) return renderDropdown(item);
+            return renderLink(item);
         }).join("");
 
         this.innerHTML = `
@@ -40,8 +73,16 @@ class SiteNavbar extends HTMLElement {
 
 class SiteFooter extends HTMLElement {
     connectedCallback() {
-        const footerLinks = pageLinks
-            .filter((item) => item.key !== "home" && item.key !== "about")
+        const flatLinks = [];
+        pageLinks.forEach((item) => {
+            if (item.children) {
+                flatLinks.push(...item.children);
+            } else if (item.key !== "home") {
+                flatLinks.push(item);
+            }
+        });
+
+        const footerLinks = flatLinks
             .map((item) => `<a class="footer-link" href="${item.href}">${item.text}</a>`)
             .join("");
 
