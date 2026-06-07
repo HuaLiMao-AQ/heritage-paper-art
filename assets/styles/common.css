@@ -414,38 +414,21 @@ site-footer {
 @media (max-width: 768px), (max-height: 700px) {
 	.section {
 		height: auto;
-		min-height: calc(100dvh - 72px);
-		padding: 48px 0;
+		min-height: auto;
+		padding: var(--space-5) 0;
 		overflow: visible;
 	}
 }
 
 .section {
 	position: relative;
-	min-height: calc(100dvh - 72px);
-	padding: var(--space-4) 0;
+	min-height: auto;
+	padding: var(--space-6) 0;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 }
 
-.section--paper {
-	background: var(--color-bg);
-}
-
-.section--surface {
-	background: var(--color-surface);
-}
-
-.section--gradient {
-	background: linear-gradient(
-		180deg,
-		#faf7f2 0%,
-		#fcf9f4 33.333%,
-		#fdfbf7 66.667%,
-		#fffdf9 100%
-	);
-}
+/* 页面区块统一使用连续背景，不再通过 section--paper / section--surface 交替分割 */
 
 .container {
 	width: min(calc(100% - 64px), var(--container-width));

@@ -1,6 +1,7 @@
 .hero {
     background: var(--color-bg-soft);
     padding: 0;
+    min-height: calc(100dvh - 72px);
 }
 
 .hero-decoration-canvas {
