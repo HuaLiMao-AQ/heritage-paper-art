@@ -90,6 +90,7 @@ function initCommonInteractions() {
             const parts = html.split(/<br\s*\/?>/i);
             title.innerHTML = "";
             title.classList.add("text-reveal-wrap");
+            title.classList.remove("reveal");
 
             parts.forEach((part) => {
                 const span = document.createElement("span");
