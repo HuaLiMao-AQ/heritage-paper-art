@@ -14,8 +14,9 @@ export const pageLinks = [
         text: "学习资源",
         children: [
             { key: "tutorials", text: "纸艺教程", href: "./tutorials.html" },
-            { text: "剪纸教程", href: "https://www.ishougongke.com/course/411008.html", external: true },
-            { text: "折纸教程", href: "https://www.aizhezhi.com/zhezhi/2622.html", external: true },
+            { text: "剪纸教程", href: "https://www.aizhezhi.com/list/zhiyi_jianzhi/", external: true },
+            { text: "折纸教程", href: "https://cn.howorigami.com/", external: true },
+            { text: "纸雕教程", href: "https://www.aizhezhi.com/list/zhiyi_zhidiao/", external: true },
         ],
     },
     {
