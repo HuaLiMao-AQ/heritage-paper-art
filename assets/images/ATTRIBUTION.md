@@ -35,3 +35,18 @@
   - Source: https://commons.wikimedia.org/wiki/File:Origami_flower_-_Carambola.JPG
   - License: CC0 1.0
   - Author: Dodoiste
+
+- `Chinese_Paper_Cutting.png`
+  - Source: https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting.png
+  - License: CC BY-SA 4.0
+  - Author: Kcida10
+
+- `DogYearPaperCutting.jpg`
+  - Source: https://commons.wikimedia.org/wiki/File:DogYearPaperCutting.jpg
+  - License: CC BY-SA 4.0
+  - Author: Gary Lee Todd
+
+- `Chinese_Paper_Cutting_Pig.svg`
+  - Source: https://commons.wikimedia.org/wiki/File:Chinese_Paper_Cutting_Pig.svg
+  - License: CC0 1.0
+  - Author: OpenClipart
