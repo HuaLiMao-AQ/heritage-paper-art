@@ -43,6 +43,12 @@
     background: var(--color-surface);
     color: var(--color-muted);
     font-size: 13px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.gallery-chip:hover {
+    transform: translateY(-1px);
 }
 
 .gallery-chip.is-active {

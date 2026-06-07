@@ -26,11 +26,15 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 32px;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 400px;
 }
 
 .gallery-card {
     overflow: hidden;
     box-shadow: var(--shadow-card);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
 }
 
 .gallery-card__image {
@@ -77,4 +81,10 @@
     .gallery-card__body {
         padding: 20px;
     }
+}
+
+.gallery-card.is-filtered-out {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
 }

@@ -138,7 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const hero = canvas.closest(".hero");
         if (!hero) return;
 
-        const dpr = window.devicePixelRatio || 1;
+        let dpr = window.devicePixelRatio || 1;
+        if (dpr > 2) dpr = 1.5;
         const w = hero.offsetWidth;
         const h = hero.offsetHeight;
 
@@ -172,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentX = 0, currentY = 0;
     let isHeroVisible = true;
     let isAnimating = false;
+    let mouseStopTimer;
 
     function updateTarget(clientX, clientY) {
         const cx = window.innerWidth / 2;
@@ -180,23 +182,22 @@ document.addEventListener("DOMContentLoaded", () => {
         targetY = (clientY - cy) / cy;
     }
 
-    document.addEventListener("mousemove", (e) => {
+    function onPointerMove(clientX, clientY) {
         if (!isHeroVisible) return;
-        updateTarget(e.clientX, e.clientY);
+        updateTarget(clientX, clientY);
+        clearTimeout(mouseStopTimer);
+        mouseStopTimer = setTimeout(() => {
+            targetX = 0;
+            targetY = 0;
+        }, 150);
         if (!isAnimating) {
             isAnimating = true;
             requestAnimationFrame(animate);
         }
-    });
+    }
 
-    document.addEventListener("touchmove", (e) => {
-        if (!isHeroVisible) return;
-        updateTarget(e.touches[0].clientX, e.touches[0].clientY);
-        if (!isAnimating) {
-            isAnimating = true;
-            requestAnimationFrame(animate);
-        }
-    }, { passive: true });
+    document.addEventListener("mousemove", (e) => onPointerMove(e.clientX, e.clientY));
+    document.addEventListener("touchmove", (e) => onPointerMove(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
