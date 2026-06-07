@@ -51,7 +51,6 @@
 
 html {
 	scroll-behavior: smooth;
-	scroll-snap-type: y proximity;
 	scroll-padding-top: 72px;
 }
 
@@ -413,14 +412,10 @@ site-footer {
 }
 
 @media (max-width: 768px), (max-height: 700px) {
-	html {
-		scroll-snap-type: none;
-	}
 	.section {
 		height: auto;
 		min-height: calc(100dvh - 72px);
 		padding: 48px 0;
-		scroll-snap-align: none;
 		overflow: visible;
 	}
 }
@@ -429,15 +424,9 @@ site-footer {
 	position: relative;
 	min-height: calc(100dvh - 72px);
 	padding: var(--space-4) 0;
-	scroll-snap-align: start;
-	scroll-margin-top: 72px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-}
-
-.site-footer {
-	scroll-snap-align: start;
 }
 
 .section--paper {
