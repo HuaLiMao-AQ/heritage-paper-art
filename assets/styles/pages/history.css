@@ -83,6 +83,29 @@
     gap: 20px;
 }
 
+.history-visual-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.history-visual {
+    overflow: hidden;
+}
+
+.history-visual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.history-visual figcaption {
+    padding: 18px 20px 20px;
+    color: var(--color-muted);
+    line-height: 1.8;
+}
+
 .impact-card {
     padding: 28px 24px;
 }
@@ -132,7 +155,8 @@
 }
 
 @media (max-width: 1024px) {
-    .impact-grid {
+    .impact-grid,
+    .history-visual-grid {
         grid-template-columns: 1fr;
     }
 }

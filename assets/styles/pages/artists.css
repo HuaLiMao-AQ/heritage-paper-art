@@ -8,52 +8,60 @@
 .artists-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    gap: 28px;
 }
 
-.artist-card {
+.artist-entry {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
     overflow: hidden;
-    box-shadow: var(--shadow-card);
 }
 
-.artist-card__image {
-    aspect-ratio: 16 / 9;
+.artist-entry__media {
+    min-height: 100%;
 }
 
-.artist-card__body {
-    padding: 32px;
+.artist-entry__body {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+    padding: 28px;
 }
 
-.artist-card__name {
+.artist-entry__meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.artist-entry__tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 6px 12px;
+    background: rgba(185, 28, 28, 0.06);
+    color: var(--color-accent);
+    font-size: 13px;
+}
+
+.artist-entry__name {
     margin: 0;
     font-family: var(--font-serif);
-    font-size: 28px;
-    line-height: 1.4;
+    font-size: 34px;
+    line-height: 1.2;
     font-weight: 500;
 }
 
-.artist-card__title {
-    margin: 8px 0 0;
-    color: var(--color-accent);
-    font-size: 14px;
-    letter-spacing: 0.05em;
-}
-
-.artist-card__bio {
-    margin: 20px 0 0;
-    color: var(--color-muted);
+.artist-entry__title {
+    margin: -8px 0 0;
+    color: var(--color-soft);
     font-size: 15px;
-    line-height: 1.8;
 }
 
-.artist-card__contribution {
-    margin: 16px 0 0;
-    padding: 16px 20px;
-    background: rgba(250, 243, 234, 0.6);
-    border-left: 3px solid var(--color-accent);
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--color-text);
+.artist-entry__summary {
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.85;
 }
 
 .artists-cta {
@@ -67,11 +75,19 @@
 }
 
 @media (max-width: 768px) {
-    .artist-card__body {
+    .artist-entry {
+        grid-template-columns: 1fr;
+    }
+
+    .artist-entry__media {
+        aspect-ratio: 16 / 9;
+    }
+
+    .artist-entry__body {
         padding: 24px;
     }
 
-    .artist-card__name {
-        font-size: 24px;
+    .artist-entry__name {
+        font-size: 28px;
     }
 }

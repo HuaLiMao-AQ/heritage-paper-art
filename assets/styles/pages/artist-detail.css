@@ -1,0 +1,92 @@
+.artist-detail-hero {
+    padding-top: 88px;
+}
+
+.artist-detail-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) 420px;
+    gap: 40px;
+    align-items: center;
+}
+
+.artist-detail-hero__image {
+    aspect-ratio: 4 / 5;
+}
+
+.artist-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 24px;
+    align-items: start;
+}
+
+.artist-detail-main,
+.artist-detail-side,
+.detail-block,
+.detail-figure {
+    padding: 28px;
+}
+
+.artist-detail-main__title,
+.artist-detail-side__title,
+.detail-block__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.artist-detail-main p,
+.detail-block p,
+.detail-figure figcaption {
+    margin: 18px 0 0;
+    color: var(--color-muted);
+    line-height: 1.85;
+}
+
+.artist-detail-tags {
+    margin: 18px 0 0;
+    padding-left: 20px;
+    color: var(--color-muted);
+    line-height: 1.9;
+}
+
+.detail-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.detail-figure img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.artist-detail-actions {
+    justify-content: center;
+    margin-top: 32px;
+}
+
+@media (max-width: 1024px) {
+    .artist-detail-hero__grid,
+    .artist-detail-layout,
+    .detail-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .artist-detail-main,
+    .artist-detail-side,
+    .detail-block,
+    .detail-figure {
+        padding: 24px;
+    }
+
+    .artist-detail-main__title,
+    .artist-detail-side__title,
+    .detail-block__title {
+        font-size: 28px;
+    }
+}
