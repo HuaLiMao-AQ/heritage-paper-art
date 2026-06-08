@@ -4,6 +4,12 @@ class SiteFooter extends HTMLElement {
     connectedCallback() {
         const flatLinks = [];
 
+        // Determine path prefix dynamically based on current page URL
+        const pathname = window.location.pathname;
+        const isSubfolder = pathname.includes("/culture/") || pathname.includes("/about/") || pathname.includes("/resources/");
+        const pagePrefix = isSubfolder ? "../" : "./";
+        const assetPrefix = isSubfolder ? "../../" : "../";
+
         pageLinks.forEach((item) => {
             if (item.children) {
                 flatLinks.push(...item.children);
@@ -14,7 +20,8 @@ class SiteFooter extends HTMLElement {
 
         const footerLinks = flatLinks.map((item) => {
             const externalAttrs = item.external ? ' target="_blank" rel="noreferrer"' : "";
-            return `<a class="footer-link" href="${item.href}"${externalAttrs}>${item.text}</a>`;
+            const href = item.external ? item.href : `${pagePrefix}${item.href}`;
+            return `<a class="footer-link" href="${href}"${externalAttrs}>${item.text}</a>`;
         }).join("");
 
         this.innerHTML = `
@@ -22,7 +29,7 @@ class SiteFooter extends HTMLElement {
                 <div class="site-footer__inner">
                     <section class="site-footer__brand">
                         <div class="site-brand site-brand--footer">
-                            <img class="site-brand__logo" src="../assets/icons/icon-full-96.svg" alt="中华纸艺 Logo">
+                            <img class="site-brand__logo" src="${assetPrefix}assets/icons/icon-full-96.svg" alt="中华纸艺 Logo">
                             <span class="site-brand__text site-brand__text--footer">中华纸艺</span>
                         </div>
                         <p class="site-footer__copy">传承剪纸、折纸与纸雕文化<br>一纸成艺，匠心独运</p>

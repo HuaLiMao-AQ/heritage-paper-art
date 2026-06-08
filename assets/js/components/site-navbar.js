@@ -4,10 +4,17 @@ class SiteNavbar extends HTMLElement {
     connectedCallback() {
         const active = this.getAttribute("active") || document.body.dataset.page || "home";
 
+        // Determine path prefix dynamically based on current page URL
+        const pathname = window.location.pathname;
+        const isSubfolder = pathname.includes("/culture/") || pathname.includes("/about/") || pathname.includes("/resources/");
+        const pagePrefix = isSubfolder ? "../" : "./";
+        const assetPrefix = isSubfolder ? "../../" : "../";
+
         function renderLink(item) {
             const isActive = item.key && item.key === active;
             const externalAttrs = item.external ? ' target="_blank" rel="noreferrer"' : "";
-            return `<a class="nav-link${isActive ? " is-active" : ""}" href="${item.href}"${externalAttrs}${isActive ? ' aria-current="page"' : ""}>${item.text}</a>`;
+            const href = item.external ? item.href : `${pagePrefix}${item.href}`;
+            return `<a class="nav-link${isActive ? " is-active" : ""}" href="${href}"${externalAttrs}${isActive ? ' aria-current="page"' : ""}>${item.text}</a>`;
         }
 
         function renderDropdown(group) {
@@ -34,8 +41,8 @@ class SiteNavbar extends HTMLElement {
         this.innerHTML = `
             <header class="site-navbar">
                 <div class="site-navbar__bar">
-                    <a class="site-brand" href="./home.html" aria-label="返回首页">
-                        <img class="site-brand__logo" src="../assets/icons/icon-full-96.svg" alt="中华纸艺 Logo">
+                    <a class="site-brand" href="${pagePrefix}home.html" aria-label="返回首页">
+                        <img class="site-brand__logo" src="${assetPrefix}assets/icons/icon-full-96.svg" alt="中华纸艺 Logo">
                         <span class="site-brand__text">中华纸艺</span>
                     </a>
                     <nav class="site-navbar__nav" aria-label="主导航">

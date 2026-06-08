@@ -7,12 +7,13 @@
     <meta property="og:title" content="中华纸艺 - 传承千年纸艺文化">
     <meta property="og:description" content="中华纸艺 - 在剪纸、折纸与纸雕之间，触摸纸张的温度与匠心的节奏。">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="../assets/images/home-hero-papercut.jpg">
+    <meta property="og:image" content="../assets/images/home-hero-papercut.webp">
     <meta name="twitter:card" content="summary_large_image">
     <title>中华纸艺 - 首页</title>
     <link rel="preload" href="../assets/fonts/ZCOOLXiaoWei-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/styles/common.css">
     <link rel="stylesheet" href="../assets/styles/pages/home.css">
+    <link rel="stylesheet" href="../assets/styles/modules/paper-lab.css">
     <link rel="icon" href="../assets/favicon-16.svg" type="image/svg+xml">
 </head>
 <body data-page="home">
@@ -24,20 +25,19 @@
             <div class="container hero-grid">
                 <div class="hero-copy-card">
                     <div class="hero-copy-card__inner">
-                    <p class="eyebrow">中国传统纸艺文化</p>
                     <h1 class="hero-title" id="home-hero-title">一纸一艺<br>千年东方</h1>
                     <div class="section-rule section-rule--left"></div>
                     <p class="hero-text">一张薄纸，在剪刃开合间透出窗花的红，在指节弯折处立起鹤的翼，在层层叠影里藏进一整片森林。<br>从剪纸的镂空之韵、折纸的立体之美，到纸雕的层叠空间，<br>让千年东方审美重新落进你的日常视线。</p>
                         <div class="button-row hero-actions">
                             <a class="button button--primary" href="./gallery.html">探索作品</a>
-                            <a class="button button--secondary" href="./about.html">了解更多</a>
+                            <a class="button button--secondary" href="./about/about.html">了解更多</a>
                         </div>
                     </div>
                 </div>
                 <div class="hero-visual" aria-hidden="true">
                     <div class="hero-stack">
                         <figure class="hero-frame">
-                            <img src="../assets/images/home-hero-papercut.jpg" alt="传统剪纸作品局部">
+                            <img src="../assets/images/home-hero-papercut.webp" alt="传统剪纸作品局部">
                             <span class="corner-fold"></span>
                         </figure>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="culture-points">
                         <article class="paper-card paper-card--fold">
                             <div class="paper-card__inner feature-point">
-                                <div class="feature-point__icon"><img src="../assets/images/icon-history.svg" alt=""></div>
+                                <div class="feature-point__icon"><img src="../assets/icons/history.svg" alt=""></div>
                                 <div>
                                 <h3 class="feature-point__title">千年传承</h3>
                                 <p class="feature-point__text">从汉代蔡伦造纸开始，纸张不再只是书写的载体。人们发现它薄而韧，适合折叠、剪刻、层叠，于是剪纸、折纸、纸雕先后出现，各自生长出不同的技艺脉络与地域风貌。</p>
@@ -70,7 +70,7 @@
                         </article>
                         <article class="paper-card paper-card--fold">
                             <div class="paper-card__inner feature-point">
-                                <div class="feature-point__icon"><img src="../assets/images/icon-craft.svg" alt=""></div>
+                                <div class="feature-point__icon"><img src="../assets/icons/brush.svg" alt=""></div>
                                 <div>
                                 <h3 class="feature-point__title">匠心工艺</h3>
                                 <p class="feature-point__text">剪纸讲究刀口利落、纹样连贯；折纸要求折痕精准、对称严谨；纸雕则在层叠间距与光影角度之间反复调试。每一道工序都是手与眼的默契，也是时间慢慢沉淀的痕迹。</p>
@@ -79,7 +79,7 @@
                         </article>
                         <article class="paper-card paper-card--fold">
                             <div class="paper-card__inner feature-point">
-                                <div class="feature-point__icon"><img src="../assets/images/icon-modern.svg" alt=""></div>
+                                <div class="feature-point__icon"><img src="../assets/icons/auto_awesome.svg" alt=""></div>
                                 <div>
                                 <h3 class="feature-point__title">现代演绎</h3>
                                 <p class="feature-point__text">今天的纸艺不再局限于节庆装饰。它走进美术馆、书籍装帧、橱窗陈列和空间装置，与灯光、插画、建筑相遇。年轻一代创作者用同样的剪刀和纸张，讲出了属于这个时代的故事。</p>
@@ -88,7 +88,7 @@
                         </article>
                     </div>
                     <figure class="image-panel image-panel--tall">
-                        <img loading="lazy" decoding="async" src="../assets/images/culture-craftsman.jpg" alt="纸艺匠人正在制作剪纸作品">
+                        <img loading="lazy" decoding="async" src="../assets/images/culture-craftsman.webp" alt="纸艺匠人正在制作剪纸作品">
                         <span class="corner-fold"></span>
                     </figure>
                 </div>
@@ -104,41 +104,41 @@
                 <div class="art-grid">
                     <article class="art-card art-card--fold">
                         <div class="art-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/art-papercut.jpg" alt="剪纸艺术作品">
+                            <img loading="lazy" decoding="async" src="../assets/images/art-papercut.webp" alt="剪纸艺术作品">
                         </div>
                         <div class="art-card__body">
                             <div class="art-card__title-row">
-                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/images/icon-papercut.svg" alt=""></span>
+                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/icons/content_cut.svg" alt=""></span>
                                 <h3 class="art-card__title">剪纸艺术</h3>
                             </div>
                             <p class="art-card__text">红纸对折，剪刀沿铅笔痕游走，展开时便是一朵对称的牡丹，或一双相衔的喜鹊。剪纸最动人的不是技巧本身，而是那份把吉祥愿望直接刻进日常物事的质朴心意。</p>
-                            <a class="art-card__more" href="./papercut.html">了解更多 <span>→</span></a>
+                            <a class="art-card__more" href="./culture/papercut.html">了解更多 <span>→</span></a>
                         </div>
                     </article>
                     <article class="art-card art-card--fold">
                         <div class="art-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/art-origami.jpg" alt="折纸艺术作品">
+                            <img loading="lazy" decoding="async" src="../assets/images/art-origami.webp" alt="折纸艺术作品">
                         </div>
                         <div class="art-card__body">
                             <div class="art-card__title-row">
-                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/images/icon-origami.svg" alt=""></span>
+                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/icons/auto_stories.svg" alt=""></span>
                                 <h3 class="art-card__title">折纸艺术</h3>
                             </div>
                             <p class="art-card__text">一张方纸不剪不裁，只靠谷折与峰折的交替，就能变出鹤、船、花、龙。折纸的秘密藏在数学的对称里，也藏在手指按压折痕时那一下微妙的力度判断中。</p>
-                            <a class="art-card__more" href="./origami.html">了解更多 <span>→</span></a>
+                            <a class="art-card__more" href="./culture/origami.html">了解更多 <span>→</span></a>
                         </div>
                     </article>
                     <article class="art-card art-card--fold">
                         <div class="art-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/龙猫.jpg" alt="龙猫主题纸雕作品">
+                            <img loading="lazy" decoding="async" src="../assets/images/龙猫.webp" alt="龙猫主题纸雕作品">
                         </div>
                         <div class="art-card__body">
                             <div class="art-card__title-row">
-                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/images/icon-craft.svg" alt=""></span>
+                                <span class="art-card__icon"><img loading="lazy" decoding="async" src="../assets/icons/layers.svg" alt=""></span>
                                 <h3 class="art-card__title">纸雕艺术</h3>
                             </div>
                             <p class="art-card__text">数层白纸经刻刀镂空后叠放在一起，前景的枝叶、中景的亭台、远景的山峦各自错开几毫米，在灯光下便生出纵深的阴影。纸雕让二维纸张拥有了可以被凝视的空间。</p>
-                            <a class="art-card__more" href="./paper-sculpture.html">了解更多 <span>→</span></a>
+                            <a class="art-card__more" href="./culture/paper-sculpture.html">了解更多 <span>→</span></a>
                         </div>
                     </article>
                 </div>
@@ -157,7 +157,7 @@
                 <div class="works-grid">
                     <article class="work-card work-card--fold">
                         <div class="work-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/work-spring-window.jpg" alt="春节窗花作品">
+                            <img loading="lazy" decoding="async" src="../assets/images/work-spring-window.webp" alt="春节窗花作品">
                         </div>
                         <div class="work-card__body">
                             <span class="work-card__tag">剪纸</span>
@@ -166,7 +166,7 @@
                     </article>
                     <article class="work-card work-card--fold">
                         <div class="work-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/龙猫.jpg" alt="龙猫主题纸雕作品">
+                            <img loading="lazy" decoding="async" src="../assets/images/龙猫.webp" alt="龙猫主题纸雕作品">
                         </div>
                         <div class="work-card__body">
                             <span class="work-card__tag">纸雕</span>
@@ -175,7 +175,7 @@
                     </article>
                     <article class="work-card work-card--fold">
                         <div class="work-card__image">
-                            <img loading="lazy" decoding="async" src="../assets/images/origami-cranes.jpg" alt="折纸鹤组合">
+                            <img loading="lazy" decoding="async" src="../assets/images/origami-cranes.webp" alt="折纸鹤组合">
                         </div>
                         <div class="work-card__body">
                             <span class="work-card__tag">折纸</span>
@@ -186,13 +186,134 @@
             </div>
         </section>
 
+        <section class="section paper-lab-stage" id="paper-lab" aria-labelledby="paper-lab-title">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title" id="paper-lab-title">纸境实验台</h2>
+                    <div class="section-rule"></div>
+                    <p class="section-summary">选择“自由探索”以通过参数动态生成纸艺，或点击“经典图样”加载固定传承模板。预览区支持在成品与折线纸样之间随时切换。</p>
+                </header>
+                <div class="paper-lab" data-paper-lab-root>
+                    <!-- Left Control Panel: Switches between "Free Explore (Current)" and "Classic Pattern (Fixed)" -->
+                    <aside class="paper-lab__panel paper-surface">
+                        <!-- Mode Tab Group (MD3 Style Segmented Control) -->
+                        <div class="lab-mode-tabs" role="tablist" aria-label="创作模式">
+                            <button type="button" class="lab-mode-tab active" role="tab" aria-selected="true" aria-controls="panel-current" id="tab-current" data-mode="current">自由探索 (当前)</button>
+                            <button type="button" class="lab-mode-tab" role="tab" aria-selected="false" aria-controls="panel-fixed" id="tab-fixed" data-mode="fixed">经典图样 (固定)</button>
+                        </div>
+                        
+                        <!-- Panel 1: Free Explore (Current) -->
+                        <div class="lab-subpanel" id="panel-current" role="tabpanel" aria-labelledby="tab-current">
+                            <form class="paper-lab__controls" data-paper-lab-form aria-label="纸境生成参数">
+                                <fieldset data-paper-type>
+                                    <legend>纸艺类型</legend>
+                                    <div class="radio-group">
+                                        <label>
+                                            <input type="radio" name="paperType" value="papercut" checked>
+                                            <span>剪纸</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="paperType" value="origami">
+                                            <span>折纸</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="paperType" value="paper-sculpture">
+                                            <span>纸雕</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <fieldset data-paper-style>
+                                    <legend>风格关键词</legend>
+                                    <div class="radio-group">
+                                        <label>
+                                            <input type="radio" name="paperStyle" value="classic" checked>
+                                            <span>古意</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="paperStyle" value="festive">
+                                            <span>节庆</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="paperStyle" value="shadow">
+                                            <span>静影</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <label class="density-label">
+                                    <span>复杂度 <output data-paper-density-value for="paper-density">2</output></span>
+                                    <input id="paper-density" data-paper-density name="paperDensity" type="range" min="1" max="3" step="1" value="2">
+                                </label>
+                                <div class="paper-lab__actions">
+                                    <button type="button" class="button button--primary" data-paper-reroll>
+                                        <img class="button-icon" src="../assets/icons/auto_awesome.svg" alt="" aria-hidden="true">
+                                        生成新版 (随机种子)
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Panel 2: Classic Pattern (Fixed) -->
+                        <div class="lab-subpanel d-none" id="panel-fixed" role="tabpanel" aria-labelledby="tab-fixed">
+                            <div class="preset-card-grid" aria-label="经典固定模板选择">
+                                <div class="preset-card active" data-preset-index="0" role="button" tabindex="0">
+                                    <div class="preset-card__header">
+                                        <span class="preset-card__badge">剪纸</span>
+                                    </div>
+                                    <h4 class="preset-card__title">连株喜字团花</h4>
+                                    <p class="preset-card__desc">八角对称剪法，融合传统双喜、如意和连云图样，展示典型的民间剪纸风格。</p>
+                                </div>
+                                <div class="preset-card" data-preset-index="1" role="button" tabindex="0">
+                                    <div class="preset-card__header">
+                                        <span class="preset-card__badge">折纸</span>
+                                    </div>
+                                    <h4 class="preset-card__title">折纸瑞鹤迎春</h4>
+                                    <p class="preset-card__desc">立体折纸千纸鹤，精密地描画纸鹤展翅瞬间的几何谷折、峰折褶皱结构。</p>
+                                </div>
+                                <div class="preset-card" data-preset-index="2" role="button" tabindex="0">
+                                    <div class="preset-card__header">
+                                        <span class="preset-card__badge">纸雕</span>
+                                    </div>
+                                    <h4 class="preset-card__title">月照鹿影深山</h4>
+                                    <p class="preset-card__desc">五层立体纸雕，表现明月、松枝、山岚和一只林中鹿的透视重叠关系。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Right Preview Panel: Canvas toggling between Artwork and Vector Template -->
+                    <div class="paper-lab__preview paper-surface">
+                        <!-- Canvas View Switcher Tabs -->
+                        <div class="canvas-mode-tabs" role="tablist" aria-label="画布模式">
+                            <button type="button" class="canvas-mode-tab active" role="tab" aria-selected="true" data-canvas-mode="artwork">成品效果</button>
+                            <button type="button" class="canvas-mode-tab" role="tab" aria-selected="false" data-canvas-mode="template">纸样底稿 (线稿)</button>
+                        </div>
+
+                        <div class="paper-lab__canvas" data-paper-preview></div>
+                        <div class="paper-lab__info">
+                            <p data-paper-lab-summary>根据纸艺类型、表现风格、复杂度与种子，生成一张可以直接保存的 SVG 纸样预览。</p>
+                            <div class="paper-lab__meta">
+                                <span data-paper-lab-seed>当前种子：20240608</span>
+                                <span class="canvas-mode-badge" data-canvas-mode-label>成品图</span>
+                            </div>
+                            <div class="paper-lab__download-wrapper">
+                                <button type="button" class="button button--secondary" data-paper-download>
+                                    <img class="button-icon" src="../assets/icons/content_cut.svg" alt="" aria-hidden="true">
+                                    下载矢量图纸 (SVG)
+                                </button>
+                            </div>
+                            <p data-paper-lab-status aria-live="polite" aria-atomic="true" class="sr-only">已生成默认草图。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section cta-center" aria-labelledby="heritage-title">
             <div class="container container--narrow">
-                <p class="eyebrow eyebrow--center">文化传承</p>
                 <h2 class="section-title" id="heritage-title">从指尖到心间</h2>
                 <p class="cta-center__summary">纸艺不是过去式，而是正在发生的生活。<br>一张红纸可以是窗上的年节问候，一只折鹤可以是桌上的日常装饰，<br>一盏纸雕灯可以是夜晚的阅读陪伴。</p>
                 <div class="cta-center__actions">
-                    <a class="button button--secondary" href="./about.html">了解更多</a>
+                    <a class="button button--secondary" href="./about/about.html">了解更多</a>
                 </div>
             </div>
         </section>
@@ -200,5 +321,6 @@
     <site-footer></site-footer>
     <script type="module" src="../assets/js/common.js"></script>
     <script src="../assets/js/hero-decoration.js"></script>
+    <script type="module" src="../assets/js/paper-lab.js"></script>
 </body>
 </html>

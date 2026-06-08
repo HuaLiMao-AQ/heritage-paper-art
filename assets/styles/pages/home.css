@@ -1,7 +1,11 @@
 .hero {
     background: var(--color-bg-soft);
-    padding: 0;
+    padding: 48px 0;
     min-height: calc(100dvh - 72px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .hero-decoration-canvas {
@@ -37,7 +41,7 @@
     background: var(--color-surface-glass);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    padding: 0 31px 31px;
+    padding: 32px 31px 31px;
 }
 
 .hero-title {
@@ -195,52 +199,39 @@
 
 .paper-card {
     position: relative;
-    background: var(--color-surface-glass);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-soft);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid rgba(28, 28, 28, 0.06);
+    padding-bottom: 24px;
+}
+
+.paper-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .paper-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba(26, 20, 15, 0.1);
+    transform: translateX(4px);
 }
 
 .paper-card__inner {
-    background: var(--color-surface-glass);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    border-radius: 0;
 }
 
 .paper-card--fold::after,
 .art-card--fold::after,
 .work-card--fold::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 16px;
-    height: 16px;
-    border-right: 16px solid var(--color-accent-soft);
-    border-bottom: 16px solid transparent;
-    transition: border-width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-right-color 0.3s ease;
+    display: none;
 }
 
-.paper-card.paper-card--fold:hover::after,
-.art-card.art-card--fold:hover::after,
-.work-card.work-card--fold:hover::after {
-    border-right-width: 24px;
-    border-bottom-width: 24px;
-    border-right-color: rgba(185, 28, 28, 0.15);
-}
-
-.paper-card:hover .corner-fold,
-.art-card:hover .corner-fold,
-.work-card:hover .corner-fold {
-    transform: rotate(5deg);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.corner-fold {
+    display: none;
 }
 
 .feature-point {
@@ -289,16 +280,15 @@
 .art-card {
     position: relative;
     overflow: hidden;
-    background: var(--color-surface-glass);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
 }
 
 .art-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba(26, 20, 15, 0.1);
+    transform: none;
 }
 
 .art-card__image {
@@ -306,7 +296,9 @@
     position: relative;
     border: none;
     background: transparent;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .art-card__image img,
@@ -324,7 +316,7 @@
 }
 
 .art-card__body {
-    padding: 33px;
+    padding: 20px 0 0;
 }
 
 .art-card__title-row {
@@ -380,16 +372,15 @@
 .work-card {
     position: relative;
     overflow: hidden;
-    background: var(--color-surface-glass);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-card);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
 }
 
 .work-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 32px rgba(26, 20, 15, 0.1);
+    transform: none;
 }
 
 .work-card__image {
@@ -397,11 +388,13 @@
     position: relative;
     border: none;
     background: transparent;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .work-card__body {
-    padding: 25px;
+    padding: 16px 0 0;
 }
 
 .work-card__tag {
@@ -415,6 +408,7 @@
     color: var(--color-accent);
     font-size: 12px;
     letter-spacing: 0.025em;
+    border-radius: 100px;
 }
 
 .work-card__title {
@@ -512,3 +506,4 @@
     0%, 100% { transform: translateY(0); opacity: 0.8; }
     50% { transform: translateY(6px); opacity: 1; }
 }
+

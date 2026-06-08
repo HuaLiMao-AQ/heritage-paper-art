@@ -23,6 +23,7 @@ function initCommonInteractions() {
     const revealSelectors = [
         ".section-header", ".hero-title", ".hero-text", ".hero-actions",
         ".paper-card", ".art-card", ".work-card", ".image-panel", ".cta-center__summary",
+        ".paper-lab__panel", ".paper-lab__preview",
     ];
 
     document.querySelectorAll(revealSelectors.join(", ")).forEach((el) => {
@@ -51,36 +52,6 @@ function initCommonInteractions() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!prefersReducedMotion) {
-        document.querySelectorAll(".button").forEach((btn) => {
-            const radius = 50;
-            const maxOffset = 4;
-
-            function magneticMove(e) {
-                const rect = btn.getBoundingClientRect();
-                const cx = rect.left + rect.width / 2;
-                const cy = rect.top + rect.height / 2;
-                const dx = e.clientX - cx;
-                const dy = e.clientY - cy;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < radius) {
-                    const factor = 1 - dist / radius;
-                    const ox = (dx / dist) * maxOffset * factor;
-                    const oy = (dy / dist) * maxOffset * factor;
-                    btn.style.transform = `translate(${ox}px, ${oy}px)`;
-                } else {
-                    btn.style.transform = "";
-                }
-            }
-
-            function magneticLeave() {
-                btn.style.transform = "";
-            }
-
-            btn.addEventListener("mousemove", magneticMove);
-            btn.addEventListener("mouseleave", magneticLeave);
-        });
-
         document.querySelectorAll(".hero-title, .section-title, .page-hero__title").forEach((title) => {
             if (title.querySelector(".text-reveal-line")) return;
 
