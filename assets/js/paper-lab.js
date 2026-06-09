@@ -44,23 +44,23 @@ const CLASSIC_PRESETS = [
         density: 3,
         seed: 888888,
         modelName: "连株喜字团花",
-        descName: "喜意绵延的对称剪纸，融合如意和连云图样"
+        descName: "八角对称剪法，融合传统双喜、如意和连云图样，展示典型的民间剪纸风格。"
     },
     {
         type: "origami",
         style: "classic",
         density: 2,
         seed: 1234567,
-        modelName: "折纸仙鹤",
-        descName: "经典的东方立体折纸，千纸鹤的峰折与谷折比例"
+        modelName: "折纸瑞鹤迎春",
+        descName: "立体折纸千纸鹤，精密地描画纸鹤展翅瞬间的几何谷折、峰折褶皱结构。"
     },
     {
         type: "paper-sculpture",
         style: "shadow",
         density: 3,
         seed: 9876543,
-        modelName: "月照鹿影",
-        descName: "五层光影雕刻，满月下野鹿伫立在林间的透视重叠"
+        modelName: "月照鹿影深山",
+        descName: "五层立体纸雕，表现明月、松枝、山岚和一只林中鹿的透视重叠关系。"
     }
 ];
 
@@ -210,7 +210,12 @@ function renderPapercut(state, palette, rng) {
 
     // Center piece generator: Star, Rosette or Flower based on seed
     let centerMarkup = "";
-    const centerType = Math.floor(rng() * 3);
+    let centerType;
+    if (state.mode === "fixed" && state.seed === 888888) {
+        centerType = 2; // Concentric geometric rosette
+    } else {
+        centerType = Math.floor(rng() * 3);
+    }
     const centerRadius = 24 + state.density * 6;
     if (centerType === 0) {
         // Star center
@@ -249,7 +254,7 @@ function renderPapercut(state, palette, rng) {
                 <circle cx="0" cy="0" r="${(centerRadius * 0.25).toFixed(1)}" fill="${palette.primary}" />
             `;
         }
-        state.modelName = "回纹双环";
+        state.modelName = (state.mode === "fixed" && state.seed === 888888) ? "连株喜字团花" : "回纹双环";
     }
 
     // Scalloped outer edge
@@ -324,7 +329,12 @@ function renderOrigami(state, palette, rng) {
     const cy = SVG_SIZE / 2;
     
     // Choose origami model based on seed: 0=Crane, 1=Fox, 2=Butterfly
-    const modelType = Math.floor(rng() * 3);
+    let modelType;
+    if (state.mode === "fixed" && state.seed === 1234567) {
+        modelType = 0; // Crane
+    } else {
+        modelType = Math.floor(rng() * 3);
+    }
     const offset = (min, max) => min + rng() * (max - min);
 
     let facets = [];
@@ -332,7 +342,7 @@ function renderOrigami(state, palette, rng) {
     
     if (modelType === 0) {
         // Model: Crane (折纸千纸鹤)
-        state.modelName = "折纸千纸鹤";
+        state.modelName = (state.mode === "fixed" && state.seed === 1234567) ? "折纸瑞鹤迎春" : "折纸千纸鹤";
         const v = {
             beak: { x: cx - 180 + offset(-8, 8), y: cy + 40 + offset(-4, 4) },
             head: { x: cx - 150 + offset(-8, 8), y: cy + 10 + offset(-4, 4) },
@@ -535,7 +545,12 @@ function renderOrigami(state, palette, rng) {
    ========================================================================== */
 function renderPaperSculpture(state, palette, rng) {
     const isTemplate = state.renderMode === "template";
-    const themeType = Math.floor(rng() * 3);
+    let themeType;
+    if (state.mode === "fixed" && state.seed === 9876543) {
+        themeType = 1; // Deer
+    } else {
+        themeType = Math.floor(rng() * 3);
+    }
     const numLayers = 3 + state.density; // 4, 5, 6 layers
     const baseTop = 150;
     const depthStep = 45;
@@ -667,7 +682,7 @@ function renderPaperSculpture(state, palette, rng) {
         }
 
     } else if (themeType === 1) {
-        state.modelName = "林深见鹿";
+        state.modelName = (state.mode === "fixed" && state.seed === 9876543) ? "月照鹿影深山" : "林深见鹿";
         // Sun
         bgElement = `<circle cx="320" cy="200" r="80" fill="${isTemplate ? "none" : palette.secondary}" ${isTemplate ? 'stroke="#e11d48" stroke-dasharray="3 3" stroke-width="1.2"' : 'fill-opacity="0.65"'} />`;
 
