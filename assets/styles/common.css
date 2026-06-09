@@ -7,28 +7,68 @@
 }
 
 :root {
-	--color-bg: #faf7f2;
+	/* Material Design 3 (MD3) Design System Tokens - Light Theme (Heritage Paper Art) */
+	--md-sys-color-primary: #b91c1c; /* Crimson red accent */
+	--md-sys-color-on-primary: #ffffff;
+	--md-sys-color-primary-container: #ffdad6;
+	--md-sys-color-on-primary-container: #410002;
+	
+	--md-sys-color-secondary: #775652;
+	--md-sys-color-on-secondary: #ffffff;
+	--md-sys-color-secondary-container: #ffdad5;
+	--md-sys-color-on-secondary-container: #2c1512;
+	
+	--md-sys-color-background: #faf7f2; /* Warm beige paper texture */
+	--md-sys-color-on-background: #201a19;
+	
+	--md-sys-color-surface: #fdfaf6; /* Elevated paper card */
+	--md-sys-color-on-surface: #201a19;
+	--md-sys-color-surface-variant: #f5ddd8;
+	--md-sys-color-on-surface-variant: #534341;
+	
+	--md-sys-color-outline: #857370;
+	--md-sys-color-outline-variant: #d8c2be;
+
+	/* MD3 Elevations */
+	--md-sys-elevation-1: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+	--md-sys-elevation-2: 0 3px 6px 0 rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.04);
+	--md-sys-elevation-3: 0 10px 20px 0 rgba(0,0,0,0.04), 0 6px 6px -2px rgba(0,0,0,0.04);
+
+	/* MD3 Corner Radius System */
+	--md-sys-shape-corner-small: 8px;
+	--md-sys-shape-corner-medium: 12px;
+	--md-sys-shape-corner-large: 16px;
+	--md-sys-shape-corner-extra-large: 24px;
+	--md-sys-shape-corner-full: 9999px;
+
+	/* Retrofitted variables to map existing layout elements to MD3 design system */
+	--color-bg: var(--md-sys-color-background);
 	--color-bg-soft: #f4eae1;
-	--color-surface: #ffffff;
-	--color-surface-glass: rgba(255, 255, 255, 0.86);
-	--color-surface-nav: rgba(255, 255, 255, 0.96);
-	--color-border: rgba(28, 28, 28, 0.08);
-	--color-border-strong: rgba(28, 28, 28, 0.16);
-	--color-text: #1c1c1c;
-	--color-muted: #534b46;
-	--color-soft: #7c726c;
-	--color-accent: #b91c1c;
-	--color-accent-strong: #c91f1f;
-	--color-accent-soft: rgba(185, 28, 28, 0.08);
-	--color-accent-line: rgba(185, 28, 28, 0.16);
-	--shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.03);
-	--shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.04);
-	--shadow-red: 0 2px 4px rgba(201, 31, 31, 0.15);
+	--color-surface: var(--md-sys-color-surface);
+	--color-surface-glass: rgba(253, 250, 246, 0.88);
+	--color-surface-nav: rgba(253, 250, 246, 0.95);
+	--color-border: var(--md-sys-color-outline-variant);
+	--color-border-strong: var(--md-sys-color-outline);
+	--color-text: var(--md-sys-color-on-background);
+	--color-muted: var(--md-sys-color-on-surface-variant);
+	--color-soft: #7a6e6c;
+	--color-accent: var(--md-sys-color-primary);
+	--color-accent-strong: #9e0c0c;
+	--color-accent-soft: var(--md-sys-color-primary-container);
+	--color-accent-line: rgba(185, 28, 28, 0.12);
+	
+	--shadow-card: var(--md-sys-elevation-2);
+	--shadow-soft: var(--md-sys-elevation-1);
+	--shadow-red: 0 2px 8px rgba(185, 28, 28, 0.12);
+	
 	--font-display: "ZCOOL XiaoWei", "Outfit", "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	--font-serif: "ZCOOL XiaoWei", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	--font-sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	--radius-sm: 16px;
-	--radius-xs: 8px;
+	
+	/* Card and component corners updated to match MD3 Extra Large and Medium specs */
+	--radius-sm: var(--md-sys-shape-corner-extra-large); /* 24px */
+	--radius-xs: var(--md-sys-shape-corner-medium);      /* 12px */
+	
 	--space-1: 8px;
 	--space-2: 16px;
 	--space-3: 24px;
@@ -266,11 +306,11 @@ site-footer {
 	top: 100%;
 	left: 50%;
 	transform: translateX(-50%) translateY(4px);
-	min-width: 120px;
-	padding: 8px 0;
+	min-width: 140px;
+	padding: 8px; /* Standard MD3 menu padding */
 	background: var(--color-surface-nav);
 	border: 1px solid var(--color-border-strong);
-	border-radius: var(--radius-sm);
+	border-radius: var(--radius-xs); /* MD3 Medium Corner (12px) for menus */
 	box-shadow: 0 4px 12px rgba(26, 20, 15, 0.08);
 	backdrop-filter: blur(10px);
 	opacity: 0;
@@ -291,8 +331,10 @@ site-footer {
 
 .nav-dropdown__menu .nav-link {
 	display: block;
-	padding: 8px 20px;
+	padding: 8px 16px;
 	white-space: nowrap;
+	border-radius: var(--md-sys-shape-corner-small); /* MD3 rounded hover state container (8px) */
+	transition: background-color 150ms cubic-bezier(0.2, 0, 0, 1), color 150ms ease;
 }
 
 .nav-dropdown__menu .nav-link:hover {
