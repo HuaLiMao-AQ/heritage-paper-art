@@ -19,18 +19,18 @@
     background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.12), transparent);
 }
 
-/* MD3 Container Cards */
+/* 容器卡片 */
 .paper-lab__panel {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 24px; /* MD3 Large Card radius */
+    border-radius: 24px; /* 大圆角 */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.03);
     padding: 24px;
     position: relative;
     transition: box-shadow 0.3s ease;
 }
 
-/* Mode Tab Bar (Segmented Control) */
+/* 切换栏 */
 .lab-mode-tabs {
     display: flex;
     background: var(--color-bg-soft);
@@ -66,7 +66,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Preset Cards for Fixed templates */
+/* 预设卡片 */
 .preset-card-grid {
     display: flex;
     flex-direction: column;
@@ -207,7 +207,7 @@
 .paper-lab__preview {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 24px; /* MD3 Large Card radius */
+    border-radius: 24px; /* 大圆角 */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.03);
     padding: 24px;
     display: flex;

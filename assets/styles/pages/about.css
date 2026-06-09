@@ -94,7 +94,7 @@
     margin-bottom: 20px;
     background: rgba(185, 28, 28, 0.05);
     color: var(--color-accent);
-    border-radius: 50%; /* Clean circular background */
+    border-radius: 50%; /* 背景装饰 */
     transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s ease;
     position: relative;
 }

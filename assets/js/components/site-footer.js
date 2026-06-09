@@ -4,7 +4,7 @@ class SiteFooter extends HTMLElement {
     connectedCallback() {
         const flatLinks = [];
 
-        // Determine path prefix dynamically based on current page URL
+        // 动态计算路径前缀（兼容根目录与子目录）
         const pathname = window.location.pathname;
         const isSubfolder = pathname.includes("/culture/") || pathname.includes("/about/") || pathname.includes("/resources/");
         const pagePrefix = isSubfolder ? "../" : "./";

@@ -248,7 +248,7 @@
     min-width: 40px;
     height: 40px;
     background: var(--color-accent-soft);
-    border-radius: var(--radius-xs); /* MD3 corner shape */
+    border-radius: var(--radius-xs); /* 圆角 */
 }
 
 .feature-point__icon img {
@@ -331,7 +331,7 @@
     width: 32px;
     height: 32px;
     background: var(--color-accent-soft);
-    border-radius: 50%; /* MD3 Circular Icon container */
+    border-radius: 50%; /* 圆形图标 */
 }
 
 .art-card__icon img {

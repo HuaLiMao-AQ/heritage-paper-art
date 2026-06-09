@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Eastern Paper Realm Generative SVG Studio
-   ========================================================================== */
+// 纸艺工坊 SVG 生成器
 
 const PAPER_TYPES = {
     papercut: "剪纸",
@@ -64,7 +62,7 @@ const CLASSIC_PRESETS = [
     }
 ];
 
-// Procedural RNG using a fast linear congruential hash algorithm
+// 简易随机发生器（基于种子）
 function createRng(seedText) {
     let hash = 2166136261;
     for (let index = 0; index < seedText.length; index += 1) {
@@ -105,37 +103,35 @@ function normalizeStyle(value) {
     return Object.prototype.hasOwnProperty.call(PAPER_STYLES, value) ? value : DEFAULT_STYLE;
 }
 
-/* --------------------------------------------------------------------------
-   1. PAPERCUT GENERATOR (Procedural Radial Symmetry Mandala)
-   -------------------------------------------------------------------------- */
+// 1. 剪纸生成
 function drawCutShape(r, a, size, type, fill, stroke, strokeWidth) {
     const p = polarPoint(0, 0, r, a);
     let shapePath = "";
     if (type === 0) {
-        // Leaf/Teardrop shape pointing outwards
+        // 叶形
         const p2 = polarPoint(0, 0, r + size, a);
         const left = polarPoint(0, 0, r + size / 2, a - 2.5);
         const right = polarPoint(0, 0, r + size / 2, a + 2.5);
         shapePath = polygonPath([p, left, p2, right]);
     } else if (type === 1) {
-        // Crescent curve
+        // 月牙形
         const a1 = a - 3.5;
         const a2 = a + 3.5;
         const start = polarPoint(0, 0, r, a1);
         const end = polarPoint(0, 0, r, a2);
         shapePath = `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} A ${r.toFixed(1)} ${r.toFixed(1)} 0 0 1 ${end.x.toFixed(1)} ${end.y.toFixed(1)} A ${(r * 0.96).toFixed(1)} ${(r * 0.96).toFixed(1)} 0 0 0 ${start.x.toFixed(1)} ${start.y.toFixed(1)}`;
     } else if (type === 2) {
-        // Diamond punch
+        // 菱形
         const top = polarPoint(0, 0, r + size / 2, a);
         const bottom = polarPoint(0, 0, r - size / 2, a);
         const left = polarPoint(0, 0, r, a - 2.5);
         const right = polarPoint(0, 0, r, a + 2.5);
         shapePath = polygonPath([top, right, bottom, left]);
     } else if (type === 3) {
-        // Simple dot / punch hole
+        // 圆点
         return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(size * 0.45).toFixed(1)}" fill="${fill}" stroke="${stroke}" stroke-width="${strokeWidth}" />`;
     } else {
-        // Traditional cloud curve (Ruyi)
+        // 如意纹
         const r1 = r;
         const r2 = r + size;
         const start = polarPoint(0, 0, r1, a - 2);
@@ -149,19 +145,19 @@ function drawCutShape(r, a, size, type, fill, stroke, strokeWidth) {
 function renderPapercut(state, palette, rng) {
     const isTemplate = state.renderMode === "template";
     const center = SVG_SIZE / 2;
-    // Radial slices: 8, 10, or 12 based on seed and density
+    // 计算分瓣数
     const slices = (4 + Math.floor(rng() * 3)) * 2; 
     const baseAngle = 360 / slices;
     const outerRadius = 240;
 
     let sliceCuts = "";
     
-    // In template mode, draw red cutting lines with no fill
+    // 在线稿模式下，绘制无填充的红色裁剪线
     const cutFill = isTemplate ? "none" : palette.background;
     const cutStroke = isTemplate ? "#e11d48" : "none";
     const cutStrokeWidth = isTemplate ? "1" : "0";
 
-    // Ring 1: Inner ring (radius 35 to 85)
+    // 内环
     const numInnerCuts = 2 + state.density;
     for (let i = 0; i < numInnerCuts; i++) {
         const t = (i + 1) / (numInnerCuts + 1);
@@ -172,7 +168,7 @@ function renderPapercut(state, palette, rng) {
         sliceCuts += drawCutShape(r, a, size, type, cutFill, cutStroke, cutStrokeWidth);
     }
 
-    // Ring 2: Middle ring (radius 95 to 165)
+    // 中环
     const numMidCuts = 3 + state.density * 2;
     for (let i = 0; i < numMidCuts; i++) {
         const t = (i + 1) / (numMidCuts + 1);
@@ -183,7 +179,7 @@ function renderPapercut(state, palette, rng) {
         sliceCuts += drawCutShape(r, a, size, type, cutFill, cutStroke, cutStrokeWidth);
     }
 
-    // Ring 3: Outer details (radius 175 to 220)
+    // 外环
     const numOuterCuts = 2 + state.density;
     for (let i = 0; i < numOuterCuts; i++) {
         const t = (i + 1) / (numOuterCuts + 1);
@@ -194,7 +190,7 @@ function renderPapercut(state, palette, rng) {
         sliceCuts += drawCutShape(r, a, size, type, cutFill, cutStroke, cutStrokeWidth);
     }
 
-    // Reconstruct radial wedges (mirrored for bilateral symmetry)
+    // 生成镜像和旋转图案
     let wedges = "";
     for (let i = 0; i < slices; i++) {
         const rot = i * baseAngle;
@@ -208,17 +204,17 @@ function renderPapercut(state, palette, rng) {
         `;
     }
 
-    // Center piece generator: Star, Rosette or Flower based on seed
+    // 生成中心图案
     let centerMarkup = "";
     let centerType;
     if (state.mode === "fixed" && state.seed === 888888) {
-        centerType = 2; // Concentric geometric rosette
+        centerType = 2; // 同心圆
     } else {
         centerType = Math.floor(rng() * 3);
     }
     const centerRadius = 24 + state.density * 6;
     if (centerType === 0) {
-        // Star center
+        // 星形
         const pts = [];
         const numPoints = 6 + Math.floor(rng() * 3) * 2;
         for (let i = 0; i < numPoints; i++) {
@@ -228,7 +224,7 @@ function renderPapercut(state, palette, rng) {
         centerMarkup = `<polygon points="${pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')}" fill="${cutFill}" stroke="${cutStroke}" stroke-width="${cutStrokeWidth}" />`;
         state.modelName = `${numPoints}角团星`;
     } else if (centerType === 1) {
-        // Multi-petal rosette
+        // 花瓣
         const numPetals = 8 + Math.floor(rng() * 5);
         for (let i = 0; i < numPetals; i++) {
             const angle = (360 / numPetals) * i;
@@ -238,7 +234,7 @@ function renderPapercut(state, palette, rng) {
         centerMarkup += `<circle cx="0" cy="0" r="${(centerRadius * 0.3).toFixed(1)}" fill="${cutFill}" stroke="${cutStroke}" stroke-width="${cutStrokeWidth}" />`;
         state.modelName = `${numPetals}瓣连魂`;
     } else {
-        // Concentric geometric rosette
+        // 同心圆
         if (isTemplate) {
             centerMarkup = `
                 <circle cx="0" cy="0" r="${centerRadius.toFixed(1)}" fill="none" stroke="#e11d48" stroke-width="1.2" />
@@ -257,7 +253,7 @@ function renderPapercut(state, palette, rng) {
         state.modelName = (state.mode === "fixed" && state.seed === 888888) ? "连株喜字团花" : "回纹双环";
     }
 
-    // Scalloped outer edge
+    // 外部波浪边
     const numScallops = slices * 4;
     const borderPoints = [];
     for (let i = 0; i <= numScallops; i++) {
@@ -320,18 +316,16 @@ function renderPapercut(state, palette, rng) {
     }
 }
 
-/* --------------------------------------------------------------------------
-   2. ORIGAMI GENERATOR (3D projected animal crease pattern / renders)
-   -------------------------------------------------------------------------- */
+// 2. 折纸生成
 function renderOrigami(state, palette, rng) {
     const isTemplate = state.renderMode === "template";
     const cx = SVG_SIZE / 2;
     const cy = SVG_SIZE / 2;
     
-    // Choose origami model based on seed: 0=Crane, 1=Fox, 2=Butterfly
+    // 选择折纸模型：0=千纸鹤, 1=小狐狸, 2=蝴蝶
     let modelType;
     if (state.mode === "fixed" && state.seed === 1234567) {
-        modelType = 0; // Crane
+        modelType = 0; // 鹤
     } else {
         modelType = Math.floor(rng() * 3);
     }
@@ -341,7 +335,7 @@ function renderOrigami(state, palette, rng) {
     let creasePatterns = "";
     
     if (modelType === 0) {
-        // Model: Crane (折纸千纸鹤)
+        // 千纸鹤模型
         state.modelName = (state.mode === "fixed" && state.seed === 1234567) ? "折纸瑞鹤迎春" : "折纸千纸鹤";
         const v = {
             beak: { x: cx - 180 + offset(-8, 8), y: cy + 40 + offset(-4, 4) },
@@ -377,7 +371,7 @@ function renderOrigami(state, palette, rng) {
             { name: "body-center", pts: [v.bodyTop, v.centerFold, v.bodyBottom], opacity: 0.78, fold: "mountain" }
         ];
 
-        // Diagonal grid crease lines
+        // 背景折痕网格
         const numRings = state.density + 2;
         for (let r = 1; r <= numRings; r++) {
             const radius = (r / (numRings + 1)) * 260;
@@ -391,7 +385,7 @@ function renderOrigami(state, palette, rng) {
         }
 
     } else if (modelType === 1) {
-        // Model: Fox (折纸小狐狸)
+        // 小狐狸模型
         state.modelName = "折纸小狐狸";
         const v = {
             earL: { x: cx - 120 + offset(-10, 10), y: cy - 150 + offset(-15, 15) },
@@ -421,7 +415,7 @@ function renderOrigami(state, palette, rng) {
             { name: "ear-flap-r", pts: [v.earBaseR, v.cheekR, v.earR], opacity: 0.28, fold: "mountain" }
         ];
 
-        // Concentric square crease lines
+        // 背景正方形折痕
         const numSquares = state.density + 2;
         for (let s = 1; s <= numSquares; s++) {
             const size = (s / (numSquares + 1)) * 480;
@@ -431,7 +425,7 @@ function renderOrigami(state, palette, rng) {
         }
 
     } else {
-        // Model: Butterfly (折纸大蝴蝶)
+        // 蝴蝶模型
         state.modelName = "折纸大蝴蝶";
         const v = {
             bodyTop: { x: cx + offset(-3, 3), y: cy - 100 + offset(-5, 5) },
@@ -458,7 +452,7 @@ function renderOrigami(state, palette, rng) {
             { name: "wing-bottom-right", pts: [v.centerR, v.wingBR, v.bodyBottom], opacity: 0.18, fold: "valley" }
         ];
 
-        // Radiating line crease pattern
+        // 辐射折痕
         const numSpokes = 16 + state.density * 4;
         for (let i = 0; i < numSpokes; i++) {
             const angle = (360 / numSpokes) * i;
@@ -469,7 +463,7 @@ function renderOrigami(state, palette, rng) {
         }
     }
 
-    // Common radial grid guidelines
+    // 辅助线
     for (let a = 0; a < 8; a++) {
         const angle = a * 45 + 22.5;
         const outer = polarPoint(cx, cy, 270, angle);
@@ -482,7 +476,7 @@ function renderOrigami(state, palette, rng) {
     let foldLinesMarkup = "";
 
     if (isTemplate) {
-        // Origami Crease Pattern: pure outline + color-coded crease lines
+        // 线稿模式：绘制折痕（红山折，蓝谷折）
         facetMarkup = facets.map(facet => {
             const path = polygonPath(facet.pts);
             return `<path d="${path}" fill="none" stroke="#0f172a" stroke-width="1" stroke-opacity="0.25" stroke-linejoin="round" />`;
@@ -501,7 +495,7 @@ function renderOrigami(state, palette, rng) {
             return lines;
         }).join("\n");
 
-        // Add CP Legend box in the corner
+        // 绘制图例
         const legendX = 40;
         const legendY = 40;
         const legend = `
@@ -540,18 +534,16 @@ function renderOrigami(state, palette, rng) {
     `;
 }
 
-/* --------------------------------------------------------------------------
-   3. PAPER SCULPTURE GENERATOR (Procedural 3D Shadowbox Landscape)
-   ========================================================================== */
+// 3. 纸雕生成
 function renderPaperSculpture(state, palette, rng) {
     const isTemplate = state.renderMode === "template";
     let themeType;
     if (state.mode === "fixed" && state.seed === 9876543) {
-        themeType = 1; // Deer
+        themeType = 1; // 鹿主题
     } else {
         themeType = Math.floor(rng() * 3);
     }
-    const numLayers = 3 + state.density; // 4, 5, 6 layers
+    const numLayers = 3 + state.density; // 纸雕层数
     const baseTop = 150;
     const depthStep = 45;
     
@@ -566,10 +558,10 @@ function renderPaperSculpture(state, palette, rng) {
         `;
     }
 
-    // Helper functions for themes
+    // 画宝塔/树/波浪的辅助函数
     const buildPagoda = (x, y, w, h, tiers) => {
         let path = "";
-        // Left side going up
+        // 左侧起笔
         for (let t = 0; t < tiers; t++) {
             const ratio = (tiers - t) / tiers;
             const tierY = y - (t * (h / tiers));
@@ -581,10 +573,10 @@ function renderPaperSculpture(state, palette, rng) {
                       L ${(x - tierW * 0.28).toFixed(1)} ${nextTierY.toFixed(1)}`;
         }
         
-        // Spire at the top
+        // 塔尖
         path += ` L ${x.toFixed(1)} ${(y - h - 12).toFixed(1)} L ${x.toFixed(1)} ${(y - h).toFixed(1)}`;
         
-        // Right side going down
+        // 右侧收笔
         for (let t = tiers - 1; t >= 0; t--) {
             const ratio = (tiers - t) / tiers;
             const tierY = y - (t * (h / tiers));
@@ -630,14 +622,14 @@ function renderPaperSculpture(state, palette, rng) {
         return path;
     };
 
-    // Define theme name and retrieve elements
+    // 获取各层路径
     let bgElement = "";
     let gateFrameElement = "";
     const listPaths = [];
 
     if (themeType === 0) {
         state.modelName = "月下楼阁";
-        // Moon
+        // 月亮
         bgElement = `<circle cx="240" cy="210" r="90" fill="${isTemplate ? "none" : palette.secondary}" ${isTemplate ? 'stroke="#e11d48" stroke-dasharray="3 3" stroke-width="1.2"' : 'fill-opacity="0.75"'} />`;
 
         for (let index = 0; index < numLayers; index++) {
@@ -662,7 +654,7 @@ function renderPaperSculpture(state, palette, rng) {
             listPaths.push(path);
         }
 
-        // Frame
+        // 外框
         const frameRadius = 240;
         const gatePath = `M 0 0 L 640 0 L 640 640 L 0 640 Z M 80 320 A ${frameRadius} ${frameRadius} 0 1 0 560 320 A ${frameRadius} ${frameRadius} 0 1 0 80 320 Z`;
         const branchPath = `M 490 130 Q 430 140, 370 190 Q 310 240, 250 220 Q 290 250, 350 230 Q 410 210, 510 170 Z M 370 190 Q 330 220, 280 260 Q 320 270, 360 230 Z`;
@@ -683,7 +675,7 @@ function renderPaperSculpture(state, palette, rng) {
 
     } else if (themeType === 1) {
         state.modelName = (state.mode === "fixed" && state.seed === 9876543) ? "月照鹿影深山" : "林深见鹿";
-        // Sun
+        // 太阳
         bgElement = `<circle cx="320" cy="200" r="80" fill="${isTemplate ? "none" : palette.secondary}" ${isTemplate ? 'stroke="#e11d48" stroke-dasharray="3 3" stroke-width="1.2"' : 'fill-opacity="0.65"'} />`;
 
         for (let index = 0; index < numLayers; index++) {
@@ -723,7 +715,7 @@ function renderPaperSculpture(state, palette, rng) {
             listPaths.push(path);
         }
 
-        // Frame
+        // 外框
         const frameRadius = 240;
         const gatePath = `M 0 0 L 640 0 L 640 640 L 0 640 Z M 80 320 A ${frameRadius} ${frameRadius} 0 1 0 560 320 A ${frameRadius} ${frameRadius} 0 1 0 80 320 Z`;
         const vinePath = `M 150 120 Q 220 140, 280 120 Q 250 150, 190 140 Z M 280 120 Q 330 110, 390 150 Q 350 160, 310 135 Z`;
@@ -744,7 +736,7 @@ function renderPaperSculpture(state, palette, rng) {
 
     } else {
         state.modelName = "沧海孤舟";
-        // Sun
+        // 太阳
         bgElement = `<circle cx="320" cy="240" r="90" fill="${isTemplate ? "none" : palette.secondary}" ${isTemplate ? 'stroke="#e11d48" stroke-dasharray="3 3" stroke-width="1.2"' : 'fill-opacity="0.75"'} />`;
 
         for (let index = 0; index < numLayers; index++) {
@@ -776,7 +768,7 @@ function renderPaperSculpture(state, palette, rng) {
             listPaths.push(path);
         }
 
-        // Frame
+        // 外框
         const frameRadius = 240;
         const gatePath = `M 0 0 L 640 0 L 640 640 L 0 640 Z M 80 320 A ${frameRadius} ${frameRadius} 0 1 0 560 320 A ${frameRadius} ${frameRadius} 0 1 0 80 320 Z`;
         const bird1 = `M 220 160 Q 228 150, 235 158 Q 242 150, 250 160 Q 242 155, 235 162 Q 228 155, 220 160 Z`;
@@ -799,10 +791,10 @@ function renderPaperSculpture(state, palette, rng) {
         }
     }
 
-    // Output Assembly
+    // 拼接输出
     if (isTemplate) {
-        // Render layers in a beautiful side-by-side grid
-        const totalCells = numLayers + 1; // mountain layers + frame
+        // 线稿模式：把各层并排平铺显示
+        const totalCells = numLayers + 1; // 总层数
         const cols = totalCells <= 4 ? 2 : 3;
         const rows = Math.ceil(totalCells / cols);
         const cellSize = cols === 2 ? 240 : (rows === 2 ? 170 : 160);
@@ -822,9 +814,9 @@ function renderPaperSculpture(state, palette, rng) {
             let labelText = "";
             
             if (i < numLayers) {
-                // Mountain/artwork layer
+                // 纸雕层
                 const path = listPaths[i];
-                // If it is Layer 1 (index 0), draw the background Sun/Moon in its cell
+                // 第一层画背景太阳/月亮
                 const layerBg = i === 0 ? bgElement : "";
                 layerContent = `
                     ${layerBg}
@@ -832,7 +824,7 @@ function renderPaperSculpture(state, palette, rng) {
                 `;
                 labelText = `第 ${i + 1} 层 (L${i + 1} - 雕刻线)`;
             } else {
-                // Frame layer (Moon Gate)
+                // 外框 layer (Moon Gate)
                 layerContent = gateFrameElement;
                 labelText = `最前外框 (L${i + 1} - 雕刻线)`;
             }
@@ -854,16 +846,16 @@ function renderPaperSculpture(state, palette, rng) {
             `;
         }
 
-        // Add warning/instruction text at bottom
+        // 底部提示文字
         layersMarkup += `
             <text x="320" y="610" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b" font-weight="500">【纸雕线稿：L1~L${numLayers + 1}代表各层图样，请将各层图案沿红线剪下后，按顺序叠放组装】</text>
         `;
 
     } else {
-        // Stacked 3D Render
-        // Draw moon
+        // 成品模式：多层阴影叠放
+        // 画月亮
         layersMarkup += bgElement;
-        // Draw mountain layers
+        // 画山层
         for (let i = 0; i < numLayers; i++) {
             const colorOpacity = 0.15 + (i / numLayers) * 0.45;
             const path = listPaths[i];
@@ -876,7 +868,7 @@ function renderPaperSculpture(state, palette, rng) {
                       filter="url(#sculpture-shadow)" />
             `;
         }
-        // Draw frame on top
+        // 画最前框
         layersMarkup += gateFrameElement;
     }
 
@@ -892,7 +884,7 @@ function renderArtwork(state, instanceId) {
     const style = normalizeStyle(state.style);
     const palette = PAPER_STYLES[style];
     
-    // In template mode, we override background and lines to draft colors
+    // 重置线稿配色
     const isTemplate = state.renderMode === "template";
     const bgFill = isTemplate ? "#ffffff" : palette.background;
     const borderStroke = isTemplate ? "#94a3b8" : palette.secondary;
@@ -957,7 +949,7 @@ function initPaperLab(root, index) {
     const summary = root.querySelector("[data-paper-lab-summary]");
     const status = root.querySelector("[data-paper-lab-status]");
 
-    // Redesigned components hooks
+    // 初始化 DOM 元素
     const modeTabs = root.querySelectorAll(".lab-mode-tab");
     const subpanelCurrent = root.querySelector("#panel-current");
     const subpanelFixed = root.querySelector("#panel-fixed");
@@ -992,10 +984,10 @@ function initPaperLab(root, index) {
 
     const instanceId = root.id ? root.id : `paper-lab-${index + 1}`;
     
-    // Core state
+    // 状态管理
     const state = {
-        mode: "current", // "current" (explore) or "fixed" (classic presets)
-        renderMode: "artwork", // "artwork" (成品) or "template" (线稿)
+        mode: "current", // current=探索，fixed=经典
+        renderMode: "artwork", // artwork=成品，template=线稿
         type: normalizeType(getSelectedType()),
         style: normalizeStyle(getSelectedStyle()),
         density: Number(densityInput.value),
@@ -1057,9 +1049,9 @@ function initPaperLab(root, index) {
         }
     }
 
-    // --- Redesigned Interactive Events ---
+    // 事件绑定
 
-    // 1. Mode Tab Switching (自由探索 vs 经典预设)
+    // 自由探索 / 经典模板切换
     modeTabs.forEach(tab => {
         tab.addEventListener("click", () => {
             const mode = tab.dataset.mode;
@@ -1079,17 +1071,17 @@ function initPaperLab(root, index) {
                 subpanelCurrent.classList.remove("d-none");
                 subpanelFixed.classList.add("d-none");
                 
-                // Restore values from inputs
+                // 同步表单值
                 state.type = normalizeType(getSelectedType());
                 state.style = normalizeStyle(getSelectedStyle());
                 state.density = Number(densityInput.value);
-                // Keep the last explore seed
+                // 保留上一次随机的种子
                 render("已切换至自由探索");
             } else {
                 subpanelCurrent.classList.add("d-none");
                 subpanelFixed.classList.remove("d-none");
 
-                // Load from selected preset card
+                // 加载经典模板配置
                 const preset = CLASSIC_PRESETS[selectedPresetIndex];
                 state.type = preset.type;
                 state.style = preset.style;
@@ -1100,7 +1092,7 @@ function initPaperLab(root, index) {
         });
     });
 
-    // 2. Preset Cards selection
+    // 切换经典卡片
     presetCards.forEach((card, index) => {
         card.addEventListener("click", () => {
             if (state.mode !== "fixed") return;
@@ -1116,7 +1108,7 @@ function initPaperLab(root, index) {
             render("已加载经典模板");
         });
 
-        // Add keyboard support for accessibility
+        // 键盘支持
         card.addEventListener("keydown", (e) => {
             if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
@@ -1125,7 +1117,7 @@ function initPaperLab(root, index) {
         });
     });
 
-    // 3. Canvas Mode Switching (成品 vs 纸样)
+    // 成品图 / 纸样线稿切换
     canvasModeTabs.forEach(tab => {
         tab.addEventListener("click", () => {
             const mode = tab.dataset.canvasMode;
@@ -1173,7 +1165,7 @@ function initPaperLab(root, index) {
         status.textContent = `已下载 ${modeText}：${PAPER_TYPES[type]}（${state.modelName}），${PAPER_STYLES[style].label}，种子 ${state.seed}。`;
     });
 
-    // Initial load
+    // 初始化
     render("已生成默认草图");
 }
 
