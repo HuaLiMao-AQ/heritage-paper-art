@@ -1,3 +1,4 @@
+(() => {
 // 纸艺工坊 SVG 生成器
 
 const PAPER_TYPES = {
@@ -96,11 +97,11 @@ function polygonPath(points) {
 }
 
 function normalizeType(value) {
-    return Object.prototype.hasOwnProperty.call(PAPER_TYPES, value) ? value : DEFAULT_TYPE;
+    return  Object.hasOwn(PAPER_TYPES, value) ? value : DEFAULT_TYPE;
 }
 
 function normalizeStyle(value) {
-    return Object.prototype.hasOwnProperty.call(PAPER_STYLES, value) ? value : DEFAULT_STYLE;
+    return  Object.hasOwn(PAPER_STYLES, value) ? value : DEFAULT_STYLE;
 }
 
 // 1. 剪纸生成
@@ -1057,7 +1058,9 @@ function initPaperLab(root, index) {
             const mode = tab.dataset.mode;
             if (state.mode === mode) return;
 
-            modeTabs.forEach(t => t.classList.remove("active"));
+            modeTabs.forEach(t => {
+                t.classList.remove("active");
+            });
             tab.classList.add("active");
             tab.setAttribute("aria-selected", "true");
             
@@ -1096,7 +1099,9 @@ function initPaperLab(root, index) {
     presetCards.forEach((card, index) => {
         card.addEventListener("click", () => {
             if (state.mode !== "fixed") return;
-            presetCards.forEach(c => c.classList.remove("active"));
+            presetCards.forEach(c => {
+                c.classList.remove("active");
+            });
             card.classList.add("active");
             
             selectedPresetIndex = index;
@@ -1172,3 +1177,4 @@ function initPaperLab(root, index) {
 document.querySelectorAll("[data-paper-lab-root]").forEach((root, index) => {
     initPaperLab(root, index);
 });
+})();

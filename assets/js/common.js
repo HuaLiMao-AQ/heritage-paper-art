@@ -1,9 +1,7 @@
-import "./components/site-navbar.js";
-import "./components/site-footer.js";
+(() => {
+    let hasInitializedCommonInteractions = false;
 
-let hasInitializedCommonInteractions = false;
-
-function initCommonInteractions() {
+    function initCommonInteractions() {
     if (hasInitializedCommonInteractions) {
         return;
     }
@@ -128,4 +126,5 @@ function initCommonInteractions() {
     }
 }
 
-initCommonInteractions();
+    initCommonInteractions();
+})();
