@@ -469,35 +469,52 @@ site-footer {
 }
 
 /* Reveal Tier System */
+.hero-title.reveal:not(.is-visible),
+.page-hero__title.reveal:not(.is-visible) {
+	transform: translateY(24px);
+}
 .hero-title.reveal,
 .page-hero__title.reveal {
-	transform: translateY(24px);
 	transition-duration: 0.7s;
 }
 
+.section-header.reveal:not(.is-visible),
+.section-title.reveal:not(.is-visible) {
+	transform: translateY(20px);
+}
 .section-header.reveal,
 .section-title.reveal {
-	transform: translateY(20px);
 	transition-duration: 0.6s;
 }
 
+.paper-card.reveal:not(.is-visible),
+.art-card.reveal:not(.is-visible),
+.work-card.reveal:not(.is-visible),
+.gallery-card.reveal:not(.is-visible) {
+	transform: translateY(28px);
+}
 .paper-card.reveal,
 .art-card.reveal,
 .work-card.reveal,
 .gallery-card.reveal {
-	transform: translateY(28px);
 	transition-duration: 0.65s;
 }
 
+.hero-text.reveal:not(.is-visible),
+.cta-center__summary.reveal:not(.is-visible),
+.section-summary.reveal:not(.is-visible) {
+	transform: translateY(16px);
+}
 .hero-text.reveal,
 .cta-center__summary.reveal,
 .section-summary.reveal {
-	transform: translateY(16px);
 	transition-duration: 0.55s;
 }
 
-.image-panel.reveal {
+.image-panel.reveal:not(.is-visible) {
 	transform: translateY(28px);
+}
+.image-panel.reveal {
 	transition-duration: 0.7s;
 }
 
